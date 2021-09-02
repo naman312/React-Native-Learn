@@ -9,27 +9,44 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { Button,View, Text,TextInput } from 'react-native';
+import { Button, View, Text, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Cool from './android/app/src/assets/pic.png'
+function LogoTitle({navigation}) {
+  
+  return (
+    <View>
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={Cool}
+      />
+      <Button title="back" onPress={() => navigation.push('Profile')}/>
+    </View>
 
+  );
+}
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
+      <Button title="hey" onPress={() => navigation.push('Profile')} />
     </View>
   );
 }
 
-// function ProfileScreen({ navigation }) {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Profile screen</Text>
-//       <Button title="Go back" onPress={() => navigation.goBack()} />
-//     </View>
-//   );
-// }
+
+function ProfileScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+
 // function DetailsScreen({ route, navigation }) {
 //   /* 2. Get the param */
 //   const { itemId, otherParam } = route.params;
@@ -84,18 +101,20 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen
+      <Stack.Navigator cool={"text"}>
+        <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{
-            title: 'My home',
-            headerStyle: {
-              backgroundColor: '#f4511e',
-            },
-            headerTintColor: '#fff',
-          }}
+          initialParams={{ param: 'hello' }}
+          options={({ navigation, route }) => ({
+            headerTitle: props => <LogoTitle {...props} navigation={navigation}/>,
+          })}
         />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+        />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

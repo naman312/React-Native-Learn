@@ -1,106 +1,55 @@
+// You can import Ionicons from @expo/vector-icons if you use Expo or
+// react-native-vector-icons/Ionicons otherwise.
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Text, View } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 
-function SettingsScreen({ navigation }) {
+function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Settings Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profile')}
-      />
-    </View>
-  );
-}
-// Doubted section of Profile screen
-function ProfileScreen({ navigation }) {
-  useFocusEffect(
-    React.useCallback(() => {
-      alert('Screen was focused');
-      // Do something when the screen is focused
-      return () => {
-        alert('Screen was unfocused');
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
-    }, [])
-  );
-
-  // React.useEffect(
-  //   () => navigation.addListener('focus', () => alert('Screen was focused')),
-  //   []
-  // );
-
-  // React.useEffect(
-  //   () => navigation.addListener('blur', () => alert('Screen was unfocused')),
-  //   []
-  // );
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
     </View>
   );
 }
 
-function HomeScreen({ navigation }) {
+function SettingsScreen() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
     </View>
   );
 }
 
-function DetailsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-    </View>
-  );
-}
 const Tab = createBottomTabNavigator();
-const SettingsStack = createNativeStackNavigator();
-const HomeStack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
-        <Tab.Screen name="First">
-          {() => (
-            <SettingsStack.Navigator>
-              <SettingsStack.Screen
-                name="Settings"
-                component={SettingsScreen}
-              />
-              <SettingsStack.Screen name="Profile" component={ProfileScreen} />
-            </SettingsStack.Navigator>
-          )}
-        </Tab.Screen>
-        <Tab.Screen name="Second">
-          {() => (
-            <HomeStack.Navigator>
-              <HomeStack.Screen name="Home" component={HomeScreen} />
-              <HomeStack.Screen name="Details" component={DetailsScreen} />
-            </HomeStack.Navigator>
-          )}
-        </Tab.Screen>
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused
+              ? 'ios-information-circle'
+              : 'ios-information-circle-outline';
+          } else if (route.name === 'Settings') {
+            iconName = focused ? 'ios-list-box' : 'ios-list';
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  </NavigationContainer>
   );
 }

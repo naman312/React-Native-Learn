@@ -14,10 +14,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen({ navigation, route }) {
+  console.log('checking the route', route);
   React.useEffect(() => {
+  
     if (route.params?.post) {
       // Post updated, do something with `route.params.post`
       // For example, send the post to the server
+      
     }
   }, [route.params?.post]);
 

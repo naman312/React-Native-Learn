@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image } from "react-native";
 import harpic from "./android/app/src/assets/harpic.jpg"
 import DropDownPicker from 'react-native-dropdown-picker';
+import { Button } from "react-native-paper";
 const Itemlist = () => {
 
   const [open, setOpen] = useState(false);
@@ -33,28 +34,52 @@ const Itemlist = () => {
 
 
         </View>
+
+
         <View style={{ marginLeft: 30 }} >
-          <Text style={{ marginBottom: 5 , fontWeight: '400'}}>SunnyFresh Toilet Cleaner </Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={{ marginBottom: 5, fontWeight: '400' }}>SunnyFresh Toilet Cleaner </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
 
             <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}145</Text>
             <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}154</Text>
-            <Text style={{ fontSize: 15, marginBottom: 5, color: "rgba(0, 0, 0.5, 0.9)", fontWeight: '400'}}>({'\u20B9'}290/L)</Text>
+            <Text style={{ fontSize: 15, marginBottom: 5, color: "rgba(0, 0, 0.5, 0.9)", fontWeight: '400' }}>({'\u20B9'}290/L)</Text>
 
           </View>
+          
+<View style={{flexDirection: 'row'}}>
+  <View style={{flex: 1,marginRight: 10}}>
 
-          <DropDownPicker
+  <DropDownPicker
             open={open}
             value={value}
             items={items}
             setOpen={setOpen}
             setValue={setValue}
             setItems={setItems}
-            textStyle={{
-              fontSize: 12
-            }}
+            
             style={styles.dropdown}
           />
+
+
+  </View>
+  <View style={{flex: 1, flexDirection: 'row'}}>
+
+  <Button
+  style={{backgroundColor: 'white', borderColor: 'red',borderWidth: 2 }}
+        title="Press me"
+       
+      />
+        
+    
+      <Button style={{backgroundColor: 'red'}}/>
+
+</View>
+          
+
+</View>
+          
+
+
         </View>
 
 
@@ -105,10 +130,9 @@ const styles = StyleSheet.create({
 
   },
   img: {
-    marginTop: 10,
+    marginTop: 7,
     height: 70,
     width: 700,
-
     resizeMode: 'contain',
   },
   categoriesItem: {
@@ -124,11 +148,12 @@ const styles = StyleSheet.create({
   categoriesItemImage: {
     height: 70,
     width: "100%",
-    marginVertical: 2,
+    
   },
   dropdown: {
-    width: 100,
-    height: 35
+    maxWidth: 100,
+    height: 35,
+    
   }
 });
 

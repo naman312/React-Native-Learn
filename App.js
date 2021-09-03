@@ -1,53 +1,101 @@
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { Text,Alert, View, StyleSheet } from 'react-native';
+import { Button, TextInput } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen({ navigation }) {
+const EditTextScreen = ({ navigation }) => {
+  const [text, setText] = React.useState('');
+
+  const hasUnsavedChanges = Boolean(text);
+
+  React.useEffect(
+    () => navigation.addListener('beforeRemove', (e) => {
+        const action = e.data.action;
+        if (!hasUnsavedChanges) {
+          return;
+        }
+
+        e.preventDefault();
+
+        Alert.alert(
+          'Discard changes?',
+          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          [
+            { text: "Don't leave", style: 'cancel', onPress: () => {} },
+            {
+              text: 'Discard',
+              style: 'destructive',
+              onPress: () => navigation.dispatch(action),
+            },
+          ]
+        );
+      }),
+    [hasUnsavedChanges, navigation]
+  );
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>This is the home screen!</Text>
-      <Button
-        onPress={() => navigation.navigate('MyModal')}
-        title="Open Modal"
+    <View style={styles.content}>
+      <TextInput
+        autoFocus
+        style={styles.input}
+        value={text}
+        placeholder="Type something…"
+        onChangeText={setText}
       />
     </View>
   );
-}
+  // return(<View>
+  //   <Text>Cool</Text>
+  // </View>)
+};
 
-function ModalScreen({ navigation }) {
+const HomeScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 30 }}>This is a modal!</Text>
-      <Button onPress={() => navigation.goBack()} title="Dismiss" />
+    <View style={styles.buttons}>
+      <Button
+        mode="contained"
+        onPress={() => navigation.push('EditText')}
+        style={styles.button}
+      >
+        Push EditText
+      </Button>
     </View>
   );
-}
+};
 
-function DetailsScreen() {
-  return (
-    <View>
-      <Text>Details</Text>
-    </View>
-  );
-}
+const Stack = createStackNavigator();
 
-const RootStack = createStackNavigator();
-
-function App() {
+export default function App() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
-        <RootStack.Group>
-          <RootStack.Screen name="Home" component={HomeScreen} />
-          <RootStack.Screen name="Details" component={DetailsScreen} />
-        </RootStack.Group>
-        <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-          <RootStack.Screen name="MyModal" component={ModalScreen} />
-        </RootStack.Group>
-      </RootStack.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="EditText" component={EditTextScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-export default App;
+const styles = StyleSheet.create({
+  content: {
+    flex: 1,
+    padding: 16,
+  },
+  input: {
+    margin: 8,
+    padding: 10,
+    borderRadius: 3,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(0, 0, 0, 0.08)',
+    backgroundColor: 'white',
+  },
+  buttons: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 8,
+  },
+  button: {
+    margin: 8,
+  },
+});

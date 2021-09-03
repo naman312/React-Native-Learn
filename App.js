@@ -1,101 +1,30 @@
-import * as React from 'react';
-import { Text,Alert, View, StyleSheet } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-const EditTextScreen = ({ navigation }) => {
-  const [text, setText] = React.useState('');
-
-  const hasUnsavedChanges = Boolean(text);
-
-  React.useEffect(
-    () => navigation.addListener('beforeRemove', (e) => {
-        const action = e.data.action;
-        if (!hasUnsavedChanges) {
-          return;
-        }
-
-        e.preventDefault();
-
-        Alert.alert(
-          'Discard changes?',
-          'You have unsaved changes. Are you sure to discard them and leave the screen?',
-          [
-            { text: "Don't leave", style: 'cancel', onPress: () => {} },
-            {
-              text: 'Discard',
-              style: 'destructive',
-              onPress: () => navigation.dispatch(action),
-            },
-          ]
-        );
-      }),
-    [hasUnsavedChanges, navigation]
-  );
-
-  return (
-    <View style={styles.content}>
-      <TextInput
-        autoFocus
-        style={styles.input}
-        value={text}
-        placeholder="Type something…"
-        onChangeText={setText}
-      />
-    </View>
-  );
-  // return(<View>
-  //   <Text>Cool</Text>
-  // </View>)
-};
-
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View style={styles.buttons}>
-      <Button
-        mode="contained"
-        onPress={() => navigation.push('EditText')}
-        style={styles.button}
-      >
-        Push EditText
-      </Button>
-    </View>
-  );
-};
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from "./android/app/src/components/HomeScreen";
+import NotificationsScreen from "./android/app/src/components/NotificationsScreen";
+import ProfileScreen from "./android/app/src/components/ProfileScreen";
+import SettingsScreen from "./android/app/src/components/SettingsScreen";
+import LinkingButtonScreen from "./android/app/src/components/LinkingButtonScreen";
+import linking from "./linking";
 
 const Stack = createStackNavigator();
 
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Notifications" component={NotificationsScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="LinkingButton" component={LinkingButtonScreen} />
+    </Stack.Navigator>
+  );
+}
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="EditText" component={EditTextScreen} />
-      </Stack.Navigator>
+    <NavigationContainer linking={linking}>
+      <MyStack />
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-    padding: 16,
-  },
-  input: {
-    margin: 8,
-    padding: 10,
-    borderRadius: 3,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(0, 0, 0, 0.08)',
-    backgroundColor: 'white',
-  },
-  buttons: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 8,
-  },
-  button: {
-    margin: 8,
-  },
-});

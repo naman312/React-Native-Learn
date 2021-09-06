@@ -3,21 +3,21 @@ import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 const Loading = () => (
   <View style={[styles.container, styles.horizontal]}>
-    <ActivityIndicator />
-    <ActivityIndicator size="large" />
-    <ActivityIndicator size="small" color="#0000ff" />
-    <ActivityIndicator size="large" color="#00ff00" />
+    
+    <ActivityIndicator style={{marginTop: '100%'}} size="large" />
+   
   </View>
 );
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
+    
   },
   horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+      
+    justifyContent: "center",
     padding: 10
   }
 });

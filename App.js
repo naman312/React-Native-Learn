@@ -93,7 +93,7 @@ const DATA = [
 ]
 
 let dataArray=[];
-
+let data=[];
 
 const FlexDirectionBasics = () => {
 
@@ -104,10 +104,19 @@ console.log(response.data[0]);
 dataArray=response.data;
 // response.data[0].id 
 // response.data[0].title
-console.log(dataArray)
+data=dataArray.map((element)=>{
+  return({
+    id: element.id,
+    title: element.title
+  }) 
+})
+console.log(data)
 }).catch(function(){
+
   console.log("i am in the error")
 })
+ 
+console.log("i am in element",data);
 
 // axios.get('https://api.github.com/users/mapbox')
 //   .then((response) => {

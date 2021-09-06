@@ -75,15 +75,25 @@ import ItemList from "./android/app/src/components/ItemList";
 
 const DATA = [
   {
-    id: "1"
+    id: "1",
+    name: "Sunny Fresh"
   },
   {
-    id: "2"
+    id: "2",
+    name: "phenyl"
   },
   {
-    id: "3"
+    id: "3",
+    name: "toilet cleaner"
+  },
+  {
+    id: "4",
+    name: "chips"
   }
 ]
+
+
+
 const FlexDirectionBasics = () => {
 
   return (
@@ -96,7 +106,20 @@ const FlexDirectionBasics = () => {
 
         <FlatList
         data={DATA}
-        renderItem={()=>{return (<ItemList/>)}}
+        renderItem={({item ,index})=>{
+          
+          return (
+            // <View>
+            //   <Text>{item.id}</Text>
+            //   </View>
+
+            <ItemList
+            name={item.name}
+            id={item.id}
+            />
+          )
+        
+        }}
        
         />
 

@@ -43,7 +43,13 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={DATA}
-        renderItem={renderItem}
+        renderItem={({item,index})=>{
+            return (
+                <View>
+                    <Text>{item.id}</Text>
+                </View>
+            )
+        }}
         // keyExtractor={(item) => item.id}
         // extraData={selectedId}
       />

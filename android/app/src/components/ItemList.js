@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Imag
 import harpic from "../assets/harpic.jpg"
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from "react-native-paper";
-const Itemlist = () => {
+const Itemlist = ({id,name}) => {
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('500 ml');
@@ -29,7 +29,7 @@ const Itemlist = () => {
             />
           </View>
           <View style={{ marginLeft: 30 }} >
-            <Text style={{ marginBottom: 5, fontWeight: '400' }}>SunnyFresh Toilet Cleaner </Text>
+            <Text style={{ marginBottom: 5, fontWeight: '400' }}>{name} </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
   
               <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}145</Text>

@@ -6,7 +6,7 @@ export default function LinkingButtonScreen({ navigation }) {
   const notioficationsUrl = "demo://app/notifications";
   const homeUrl = "demo://app/home/123";
   const settingsUrl = "demo://app/settings";
-
+  
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Button

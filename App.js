@@ -12,6 +12,8 @@ import Loading from "./android/app/src/components/Loading";
 // return error page 
 // else 
 // return flatlist
+
+let page=1;
 let ErrorPage=()=>{
    return (
      <View style={{backgroundColor: 'red'}}>
@@ -20,30 +22,45 @@ let ErrorPage=()=>{
    )
 }
 
+
 const FlexDirectionBasics = () => {
   let dataArray = [];
   const[loading, setLoading]=useState(true);
   let [errorcab, setError]=useState(false);
   const [data, setData] = useState([]);
 
+  let loadMoreResults=()=>{
+    page++;
+    setLoading(true);
+    setError(false);
+    console.log("----------------------------------------------------------------")
+  }
+  let loadFresh=()=>{
+    setError(false);
+    setLoading(true);
+    setData([]);
+   
+  }
 
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/todos/')
+    let url = `https://randomuser.me/api/?page=${page}&results=30`;
+   // url=toString(url);
+    axios.get(url)
       .then(response => {
-        console.log(response);
+        console.log("heydjjjacskjcvklzcv",response.data.results[0].location.city);
         console.log("res", typeof (response));
-        console.log(response.data[0]);
-        dataArray = response.data;
+     //   console.log(response.data[0]);
+      dataArray = response.data.results;
         // response.data[0].id 
         // response.data[0].title
         let copydata = dataArray.map((element) => {
           return ({
-            id: element.id,
-            title: element.title
+            id: element.location.street.number,
+            title: element.location.city
           })
         })  
         console.log("length of copy dtaa", copydata.length)
-        setData(copydata);
+        setData([...data,...copydata]);
         //console.log(copydata);
           setLoading(false);
           setError(false);
@@ -53,7 +70,7 @@ const FlexDirectionBasics = () => {
         setLoading(false);
         setError(true);
       })
-  },[])
+  },[loading])
 
 
   return (
@@ -64,16 +81,22 @@ const FlexDirectionBasics = () => {
       {loading? <Loading/>:null }
         {  errorcab?<ErrorPage/>: <FlatList 
           data={data}
+          onEndReached={loadMoreResults}
+          onEndReachedThreshold={0.5}
+        
          renderItem={({ item, index }) => {
             return (
               <ItemList
                 name={item.title}
-                id={item.id}
+                id={item.email}
               />
             )
           }}
           keyExtractor={item => item.id}
-          extraData={data}          
+          extraData={data}  
+          onRefresh={loadFresh}   
+          refreshing={loading}
+     
         />
         }    
         

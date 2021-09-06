@@ -28,18 +28,20 @@ const FlexDirectionBasics = () => {
   const[loading, setLoading]=useState(true);
   let [errorcab, setError]=useState(false);
   const [data, setData] = useState([]);
+  let [bottom, setBottom]=useState(false);
 
   let loadMoreResults=()=>{
     page++;
     setLoading(true);
     setError(false);
     console.log("----------------------------------------------------------------")
+    setBottom(true);
   }
   let loadFresh=()=>{
     setError(false);
     setLoading(true);
     setData([]);
-   
+   setBottom(false);
   }
 
   useEffect(() => {
@@ -78,7 +80,7 @@ const FlexDirectionBasics = () => {
     <SafeAreaView style={styles.container}>
      
 
-      {loading? <Loading/>:null }
+      {loading? <Loading top={bottom}/>:null }
         {  errorcab?<ErrorPage/>: <FlatList 
           data={data}
           onEndReached={loadMoreResults}
@@ -89,6 +91,7 @@ const FlexDirectionBasics = () => {
               <ItemList
                 name={item.title}
                 id={item.email}
+                
               />
             )
           }}

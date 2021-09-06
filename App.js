@@ -92,15 +92,19 @@ const DATA = [
   }
 ]
 
-
+let dataArray=[];
 
 
 const FlexDirectionBasics = () => {
 
   
- axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita').then((response)=>{
+ axios.get('https://jsonplaceholder.typicode.com/todos/').then((response)=>{
 console.log("res",typeof(response));
-console.log(response.data.drinks)
+console.log(response.data[0]);
+dataArray=response.data;
+// response.data[0].id 
+// response.data[0].title
+console.log(dataArray)
 }).catch(function(){
   console.log("i am in the error")
 })

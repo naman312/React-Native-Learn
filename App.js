@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image,FlatList} from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image, FlatList,SafeAreaView } from "react-native";
 import harpic from "./android/app/src/assets/harpic.jpg"
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from "react-native-paper";
@@ -38,7 +38,7 @@ import axios from 'react-native-axios'
 //             <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}154</Text>
 //             <Text style={{ fontSize: 15, marginBottom: 5, color: "rgba(0, 0, 0.5, 0.9)", fontWeight: '400' }}>({'\u20B9'}290/L)</Text>
 //           </View>
-          
+
 // <View style={{flexDirection: 'row'}}>
 //   <View style={{flex: 1,marginRight: 10}}>
 
@@ -49,7 +49,7 @@ import axios from 'react-native-axios'
 //             setOpen={setOpen}
 //             setValue={setValue}
 //             setItems={setItems}
-            
+
 //             style={styles.dropdown}
 //           />
 //   </View>
@@ -73,94 +73,112 @@ import axios from 'react-native-axios'
 
 // }
 
-const DATA = [
-  {
-    id: "1",
-    name: "Sunny Fresh"
-  },
-  {
-    id: "2",
-    name: "phenyl"
-  },
-  {
-    id: "3",
-    name: "toilet cleaner"
-  },
-  {
-    id: "4",
-    name: "chips"
-  }
-]
+// const DATA = [
+//   {
+//     id: "1",
+//     name: "Sunny Fresh"
+//   },
+//   {
+//     id: "2",
+//     name: "phenyl"
+//   },
+//   {
+//     id: "3",
+//     name: "toilet cleaner"
+//   },
+//   {
+//     id: "4",
+//     name: "chips"
+//   }
+// ]
 
-let dataArray=[];
-let data=[];
+
 
 const FlexDirectionBasics = () => {
+  let dataArray = [];
 
-  
- axios.get('https://jsonplaceholder.typicode.com/todos/').then((response)=>{
-console.log("res",typeof(response));
-console.log(response.data[0]);
-dataArray=response.data;
-// response.data[0].id 
-// response.data[0].title
-data=dataArray.map((element)=>{
-  return({
-    id: element.id,
-    title: element.title
-  }) 
-})
-console.log(data)
-}).catch(function(){
+  const [data, setData] = useState([]);
 
-  console.log("i am in the error")
-})
- 
-console.log("i am in element",data);
+  useEffect(() => {
+    try {
+      axios.get('https://jsonplaceholder.typicode.com/todos/').then((response) => {
+        console.log("res", typeof (response));
+        console.log(response.data[0]);
+        dataArray = response.data;
+        // response.data[0].id 
+        // response.data[0].title
+        let copydata = dataArray.map((element) => {
+          return ({
+            id: element.id,
+            title: element.title
+          })
+        })
+        console.log("length of copy dtaa", copydata.length)
+        setData(copydata);
+        //console.log(copydata);
 
-// axios.get('https://api.github.com/users/mapbox')
-//   .then((response) => {
-//     console.log(response.data);
-//     console.log(response.status);
-//     console.log(response.statusText);
-//     console.log(response.headers);
-//     console.log(response.config);
-//   });
+      }).catch(function () {
+
+        console.log("i am in the error")
+      })
+
+    }
+    catch (err) {
+      console.log('i am in error of catch block')
+    }
+
+
+  }, [])
+
+
+
+
+  // axios.get('https://api.github.com/users/mapbox')
+  //   .then((response) => {
+  //     console.log(response.data);
+  //     console.log(response.status);
+  //     console.log(response.statusText);
+  //     console.log(response.headers);
+  //     console.log(response.config);
+  //   });
   return (
 
-    <View style={[styles.container]} >
-
+    <SafeAreaView style={styles.container}>
       {/* <View style={[styles.box]}>
         <Item />
       </View> */}
 
-        <FlatList
-        data={DATA}
-        renderItem={({item ,index})=>{
+      {
+        data.length == 0 ? (<Text>Empty</Text>) : <FlatList
+          data={data}
+          renderItem={({ item, index }) => {
+
+            return (
+              // <View>
+              //   <Text>1</Text>
+              //   </View>
+
+              <ItemList
+                name={item.title}
+                id={item.id}
+
+              />
+            )
+
+          }}
+          keyExtractor={item => item.id}
+          extraData={data}
           
-          return (
-            // <View>
-            //   <Text>{item.id}</Text>
-            //   </View>
-
-            <ItemList
-            name={item.name}
-            id={item.id}
-            />
-          )
-        
-        }}
-       
         />
+      }
 
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-
-    marginTop: 1,
+   
 
   },
   box: {
@@ -197,12 +215,12 @@ const styles = StyleSheet.create({
   categoriesItemImage: {
     height: 70,
     width: "100%",
-    
+
   },
   dropdown: {
     maxWidth: 100,
     height: 35,
-    
+
   }
 });
 

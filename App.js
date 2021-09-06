@@ -4,7 +4,7 @@ import harpic from "./android/app/src/assets/harpic.jpg"
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from "react-native-paper";
 import ItemList from "./android/app/src/components/ItemList";
-
+import axios from 'react-native-axios'
 // const Itemlist = () => {
 
 //   const [open, setOpen] = useState(false);
@@ -94,8 +94,25 @@ const DATA = [
 
 
 
+
 const FlexDirectionBasics = () => {
 
+  
+ axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita').then((response)=>{
+console.log("res",typeof(response));
+console.log(response.data.drinks)
+}).catch(function(){
+  console.log("i am in the error")
+})
+
+// axios.get('https://api.github.com/users/mapbox')
+//   .then((response) => {
+//     console.log(response.data);
+//     console.log(response.status);
+//     console.log(response.statusText);
+//     console.log(response.headers);
+//     console.log(response.config);
+//   });
   return (
 
     <View style={[styles.container]} >

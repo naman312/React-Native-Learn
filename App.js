@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image,FlatList} from "react-native";
 import harpic from "./android/app/src/assets/harpic.jpg"
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from "react-native-paper";
-import Item from "./android/app/src/components/ItemList";
+import ItemList from "./android/app/src/components/ItemList";
+
 // const Itemlist = () => {
 
 //   const [open, setOpen] = useState(false);
@@ -72,15 +73,32 @@ import Item from "./android/app/src/components/ItemList";
 
 // }
 
-
+const DATA = [
+  {
+    id: "1"
+  },
+  {
+    id: "2"
+  },
+  {
+    id: "3"
+  }
+]
 const FlexDirectionBasics = () => {
 
   return (
+
     <View style={[styles.container]} >
 
-      <View style={[styles.box]}>
+      {/* <View style={[styles.box]}>
         <Item />
-      </View>
+      </View> */}
+
+        <FlatList
+        data={DATA}
+        renderItem={()=>{return (<ItemList/>)}}
+       
+        />
 
     </View>
   );
@@ -136,3 +154,4 @@ const styles = StyleSheet.create({
 });
 
 export default FlexDirectionBasics;
+

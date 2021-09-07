@@ -186,12 +186,14 @@
 // New proceeding towards redux 
 
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as React from 'react';
-import { View, Button, Text, Animated ,StyleSheet} from 'react-native';
+import { View, Button, Text, Animated, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider, useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { createStore, combineReducers } from 'redux';
 import countReducer from './Redux/reducers/count';
 import {
@@ -199,7 +201,7 @@ import {
   increment,
   sucess,
   fail
- 
+
 } from "./Redux/actions/counting";
 import { TextInput } from 'react-native-gesture-handler';
 // will write Reducer here for combination 
@@ -210,18 +212,126 @@ import { TextInput } from 'react-native-gesture-handler';
 
 const store = createStore(countReducer);
 
+const db = [
+  { id: 1, name: "naman" },
+  { id: 2, name: "tushar" },
+  { id: 3, name: "sameer" },
+  { id: 5, name: "Akash" },
+  { id: 6, name: "himanshu" }
+]
+let id = 7;
 
-function Login({navigation}){
-  const [text, onChangeText] = React.useState("");
+function Login({ navigation }) {
+  const dispatch = useDispatch();
 
-  return(
+  React.useEffect(()=>{
+   
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@storage_Key')
+      if(value !== null) {
+        // value previously stored
+        dispatch(sucess())
+
+      }else{
+        dispatch(fail())
+      }
+    } catch(e) {
+      dispatch(fail());
+      console.log('I am in the error')
+    }
+  }
+
+  getData();
+
+
+  },[])
+
+
+
+
+
+  let auth = useSelector(state => state);
+  const [text, setText] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [id, setId] = React.useState("");
+  const handler = (text) => {
+    setText(text);
+    if (text == '1') {
+
+      dispatch(sucess());
+
+    } else {
+      dispatch(fail())
+    }
+  }
+  const submitHandler = () => {
+    console.log("element  id", id)
+    console.log("element name", name);
+    let find = false;
+    db.map((ele) => {
+      if (ele.id == id && ele.name == name) {
+        find = true;
+      }
+    })
+    if (find === true) {
+      dispatch(sucess())
+      // let Uid = v4();
+      const storeData = async (value) => {
+        try {
+          const jsonValue = JSON.stringify(value)
+          await AsyncStorage.setItem('@storage_Key', jsonValue)
+        } catch (e) {
+          console.log("Not able to set async storage")
+        }
+      }
+      storeData('2224454657');
+
+    } else {
+      dispatch(fail());
+    }
+  }
+
+  return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Login Screen </Text>
+      <Text>Enter Name</Text>
       <TextInput
-       style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
+        style={styles.input}
+        onChangeText={setName}
+        value={name}
       />
+      <Text>Enter Id</Text>
+
+      <TextInput
+        style={styles.input}
+        onChangeText={setId}
+        value={id}
+      />
+      <Button
+        title="Submit"
+        onPress={() => {
+          submitHandler();
+        }}
+      />
+      {/* <TextInput
+        style={styles.input}
+        onChangeText={(text) => { return (handler(text)) }}
+        value={text}
+      /> */}
+      {auth === 'true' ? <Button title="Authenticated" color="#1a8f3e" /> : auth == 'false' ? <Button title="authentication failed" color="#f54242" /> : <Button title="enter  text" style={{ backgroundColor: 'green' }} />}
+      {auth === 'true' ? <Button title="Go To Home page"
+        style={{ margin: 100 }}
+        onPress={() => (navigation.navigate('Home'))}
+      /> :
+        null}
+      {auth === 'false' ?
+        <Button title="Want to SignUp ? " color="#d94355"
+          onPress={() => (navigation.navigate('Signup'))}
+        /> : null
+      }
+
 
     </View>
   )
@@ -229,29 +339,29 @@ function Login({navigation}){
 
 
 function Home({ navigation }) {
- let displayCount="i am cool"
- const dispatch = useDispatch();
-  displayCount=useSelector(state=>state);
-  
+  let displayCount = "i am cool"
+  const dispatch = useDispatch();
+  displayCount = useSelector(state => state);
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home screen</Text>
       <Text> Showing here {displayCount}</Text>
 
-    <Button
-    title="add me"
-    onPress={()=>{
-      console.log("i amm in the add me")  
-      return(dispatch(sucess()))
-    }}
-    />
-     <Button
-    title="Decrement Me "
-    onPress={()=>{
-      console.log("i amm in the add me")  
-      return(dispatch(fail()))
-    }}
-    />
+      <Button
+        title="add me"
+        onPress={() => {
+          console.log("i amm in the add me")
+          return (dispatch(sucess()))
+        }}
+      />
+      <Button
+        title="Decrement Me "
+        onPress={() => {
+          console.log("i amm in the add me")
+          return (dispatch(fail()))
+        }}
+      />
 
       <Button
         title="Go to Profile"
@@ -287,20 +397,41 @@ const forFade = ({ current, next }) => {
   };
 };
 
-function Signup({navigation}){
+function Signup({ navigation }) {
+  const [name, setName] = React.useState("");
+  const [dis, setDis] = React.useState(id);
+  const [signup, setSignUp] = React.useState(false);
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>SignUP </Text>
       {/* <Text> Showing here {displayCount}</Text> */}
+      <Text>Enter Name</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setName}
+        value={name}
+      />
+      <Button
+        title="Click here for token generation"
+        onPress={() => {
+          db.push({ name: name, id: id });
+          setDis(id)
+          id++;
 
-    <Button
-    title="Click here for token generation"
-    onPress={()=>{
-      console.log("i amm in the add me")  
-      return(dispatch(increment()))
-    }}
-    />
-    
+          setSignUp(true);
+        }}
+      />
+      {signup === true ?
+        <Text>Success and your id is {id - 1}</Text> : null
+      }
+      {
+        signup === true ?
+          <Button
+            title="Go to Login page"
+            onPress={() => navigation.navigate('Login')}
+          /> : null
+      }
+
     </View>
   )
 }
@@ -310,6 +441,10 @@ function MyStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="Login"
+        component={Login}
+      />
+      <Stack.Screen
         name="Home"
         component={Home}
         options={{
@@ -317,16 +452,13 @@ function MyStack() {
           headerStyle: { backgroundColor: 'tomato' },
         }}
       />
-       <Stack.Screen
-      name="Login"
-      component={Login}
-      />
-         <Stack.Screen
-        name="Sign Up"
+
+      <Stack.Screen
+        name="Signup"
         component={Signup}
         options={{ headerStyleInterpolator: forFade }}
       />
-      
+
       {/* <Stack.Screen
         name="Home"
         component={Home}
@@ -340,8 +472,8 @@ function MyStack() {
         component={Profile}
         options={{ headerStyleInterpolator: forFade }}
       />
-      
-     
+
+
     </Stack.Navigator>
   );
 }
@@ -361,6 +493,7 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     margin: 12,
+    width: 200,
     borderWidth: 1,
     padding: 10,
   },

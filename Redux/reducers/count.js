@@ -3,7 +3,7 @@ const initialState={
     count: 90
 } 
 
-const countReducer=(state='false',action)=>{
+const countReducer=(state='not typed',action)=>{
     console.log("hey called")
     switch(action.type){
         // case 'INCREMENT': 

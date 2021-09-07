@@ -232,6 +232,7 @@ function Login({ navigation }) {
       const value = await AsyncStorage.getItem('@storage_Key')
       if(value !== null) {
         // value previously stored
+        console.log("valeue of token is ", value)
         dispatch(sucess())
 
       }else{
@@ -348,17 +349,27 @@ function Home({ navigation }) {
       <Text>Home screen</Text>
       <Text> Showing here {displayCount}</Text>
 
+      
       <Button
-        title="add me"
+        title="Log out "
         onPress={() => {
-          console.log("i amm in the add me")
-          return (dispatch(sucess()))
-        }}
-      />
-      <Button
-        title="Decrement Me "
-        onPress={() => {
-          console.log("i amm in the add me")
+          console.log("i amm in the log out functionality me")
+
+         let removeValue = async () => {
+            try {
+              await AsyncStorage.removeItem('@storage_Key')
+              console.log("Token delete");
+              navigation.navigate('Login')
+            } catch(e) {
+              // remove error
+              console.log("not able to delete the token")
+            }
+           
+          
+            console.log('Done.')
+          }
+          removeValue();
+
           return (dispatch(fail()))
         }}
       />

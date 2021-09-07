@@ -188,7 +188,7 @@
 
 
 import * as React from 'react';
-import { View, Button, Text, Animated } from 'react-native';
+import { View, Button, Text, Animated ,StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider, useSelector, useDispatch } from 'react-redux';
@@ -197,8 +197,11 @@ import countReducer from './Redux/reducers/count';
 import {
   decrement,
   increment,
+  sucess,
+  fail
  
 } from "./Redux/actions/counting";
+import { TextInput } from 'react-native-gesture-handler';
 // will write Reducer here for combination 
 // const rootReducer=combineReducers({
 //     counts: countReducer
@@ -207,6 +210,22 @@ import {
 
 const store = createStore(countReducer);
 
+
+function Login({navigation}){
+  const [text, onChangeText] = React.useState("");
+
+  return(
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Login Screen </Text>
+      <TextInput
+       style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+      />
+
+    </View>
+  )
+}
 
 
 function Home({ navigation }) {
@@ -223,14 +242,14 @@ function Home({ navigation }) {
     title="add me"
     onPress={()=>{
       console.log("i amm in the add me")  
-      return(dispatch(increment()))
+      return(dispatch(sucess()))
     }}
     />
      <Button
     title="Decrement Me "
     onPress={()=>{
       console.log("i amm in the add me")  
-      return(dispatch(decrement()))
+      return(dispatch(fail()))
     }}
     />
 
@@ -268,6 +287,23 @@ const forFade = ({ current, next }) => {
   };
 };
 
+function Signup({navigation}){
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>SignUP </Text>
+      {/* <Text> Showing here {displayCount}</Text> */}
+
+    <Button
+    title="Click here for token generation"
+    onPress={()=>{
+      console.log("i amm in the add me")  
+      return(dispatch(increment()))
+    }}
+    />
+    
+    </View>
+  )
+}
 const Stack = createStackNavigator();
 
 function MyStack() {
@@ -281,11 +317,31 @@ function MyStack() {
           headerStyle: { backgroundColor: 'tomato' },
         }}
       />
+       <Stack.Screen
+      name="Login"
+      component={Login}
+      />
+         <Stack.Screen
+        name="Sign Up"
+        component={Signup}
+        options={{ headerStyleInterpolator: forFade }}
+      />
+      
+      {/* <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerTintColor: 'white',
+          headerStyle: { backgroundColor: 'tomato' },
+        }}
+      /> */}
       <Stack.Screen
         name="Profile"
         component={Profile}
         options={{ headerStyleInterpolator: forFade }}
       />
+      
+     
     </Stack.Navigator>
   );
 }
@@ -300,3 +356,12 @@ export default function App() {
 
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});

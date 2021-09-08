@@ -1,5 +1,8 @@
-import { createStore } from "redux";
+import { createStore,applyMiddleware } from "redux";
 //import BallReducer from "../balls/ballReducer";
 import rootReducer from "../reducers/rootReducers";
-const store=createStore(rootReducer);
+import thunk from 'redux-thunk'
+const store=createStore(rootReducer,applyMiddleware(thunk));
+
 export default store;
+ 

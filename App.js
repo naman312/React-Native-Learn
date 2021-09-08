@@ -10,11 +10,13 @@ import { createStore, combineReducers } from 'redux';
 import { TextInput } from 'react-native-gesture-handler';
 import store from './android/app/src/Redux/store/store';
 import BallContainer from './BallContainer';
+import BatContainer from './BatContainer';
 export default function App(){
   return (
   <Provider store={store}>
     <Text>jdlak</Text>
       <BallContainer/>
+      <BatContainer/>
   </Provider>
 
   

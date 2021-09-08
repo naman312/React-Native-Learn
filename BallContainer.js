@@ -22,9 +22,9 @@ import{connect} from 'react-redux'
     )
 }
 const mapStateToProps=state=>{
-    console.log("state", state.numofBalls)
+    console.log("state", state.ball.numofBalls)
     return{
-        numofBalls: state.numofBalls
+        numofBalls: state.ball.numofBalls
     }
 }
 // for getting dispatch method

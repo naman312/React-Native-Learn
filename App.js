@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import React, { useState , useEffect} from 'react';
+import React, { useState , useEffect,useRef} from 'react';
 import { View, Button, Text, Animated, StyleSheet,Linking,Alert,PermissionsAndroid } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,6 +13,30 @@ import BallContainer from './BallContainer';
 import BatContainer from './BatContainer';
 import UserContainer from './android/app/UserContainer';
 import openMap from 'react-native-open-maps'
+
+const FadeInView=(props)=>{
+  const fadeAnim=useRef(new Animated.Value(0)).current
+  useEffect(()=>{
+      Animated.timing(
+        fadeAnim,{
+          toValue: 1,
+          duration: 50000,
+          useNativeDriver: true,
+        }
+      ).start()
+  },[fadeAnim])
+return(
+  <Animated.View
+    style={{
+      ...props.style,
+      opacity: fadeAnim
+    }}>
+      {props.children}
+    </Animated.View>
+)
+
+}
+
 
 const requestCameraPermission = async () => {
   try {
@@ -40,6 +64,7 @@ const requestCameraPermission = async () => {
 
 
 export default function App(){
+ 
   const [message, setMessage]=useState('');
   const [number, setNumber]=useState('');
   const _goToYosemite=()=>{
@@ -65,6 +90,9 @@ export default function App(){
   // </Provider>
 
 <View>
+  <FadeInView>
+    <Button title="Press me" />
+  </FadeInView>
     <Text>Enter your Query </Text>
     <TextInput
     onChangeText={setMessage}
@@ -91,7 +119,9 @@ export default function App(){
     />
 
 <Button title="request permissions" onPress={requestCameraPermission} />
-
+<FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
+        <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+      </FadeInView>
 </View>
 
 

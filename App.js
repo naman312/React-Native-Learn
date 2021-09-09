@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import React, { useState } from 'react';
-import { View, Button, Text, Animated, StyleSheet,Linking,Alert } from 'react-native';
+import React, { useState , useEffect} from 'react';
+import { View, Button, Text, Animated, StyleSheet,Linking,Alert,PermissionsAndroid } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider, useSelector, useDispatch } from 'react-redux';
@@ -12,10 +12,41 @@ import store from './android/app/src/Redux/store/store';
 import BallContainer from './BallContainer';
 import BatContainer from './BatContainer';
 import UserContainer from './android/app/UserContainer';
+import openMap from 'react-native-open-maps'
+
+const requestCameraPermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        title: "Cool Photo App Camera Permission",
+        message:
+          "Cool Photo App needs access to your camera " +
+          "so you can take awesome pictures.",
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "OK"
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can use the camera");
+    } else {
+      console.log("Camera permission denied");
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+
 export default function App(){
   const [message, setMessage]=useState('');
   const [number, setNumber]=useState('');
- 
+  const _goToYosemite=()=>{
+    openMap({ latitude: 37.865101, longitude: -119.538330 });
+  }
+
+    
   const submitHandler=()=>{
     let url ="whatsapp://send?text=" + message +"&phone=91"+number;
     Linking.openURL(url).then(data=>{
@@ -52,6 +83,14 @@ export default function App(){
           submitHandler();
     }}
     />
+    <Button
+    title="Google Map"
+    onPress={()=>{
+      _goToYosemite();
+    }}
+    />
+
+<Button title="request permissions" onPress={requestCameraPermission} />
 
 </View>
 

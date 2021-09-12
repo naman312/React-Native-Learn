@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState  } from "react";
 import { View, Button, Text, Animated, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

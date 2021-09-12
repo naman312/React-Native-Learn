@@ -1,6 +1,6 @@
 
-import React, { useState } from "react";
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
+import React, {  } from "react";
+import { FlatList, useStateSafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Itemlist from "./android/app/src/components/ItemList";
 const DATA = [
   {

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useContext, useEffect,useState } from 'react';
 import { Button, Text, View, StyleSheet, FlatList, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,7 +9,8 @@ import { SliderBox } from "react-native-image-slider-box";
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import searchIcon from './android/app/src/assets/search.png';
 import axios from 'axios'
-
+// import { Cart } from './ContextStore/Cart';
+import { CartContext } from './ContextStore/CardContext';
 const images = ["https://c8.alamy.com/comp/2B1BXP3/discounts-advertisement-seen-in-a-retail-shop-inside-harbour-city-mall-one-of-the-hong-kongs-premier-shopping-destination-usually-full-of-tourists-and-shoppersthe-deadly-coronavirus-known-as-covid-19-has-caused-most-industries-factories-and-malls-in-china-shut-down-more-than-50-million-people-in-quarantine-with-countries-restriction-on-entries-to-control-the-spread-of-the-virus-as-well-as-more-than-25000-flight-cancellations-worldwide-long-dependent-on-the-spending-of-chinese-buyers-remind-home-tourism-had-it-biggest-hit-2B1BXP3.jpg",
   "https://images.financialexpress.com/2020/12/mallu1200.jpg",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvD-jE5-60oxfDkmTV7E_DvvC_MRjK7DiqlwXciY-k72vaGdP8tqmq_9aAcuBBnpYt2kw&usqp=CAU",
@@ -23,59 +24,67 @@ const images = ["https://c8.alamy.com/comp/2B1BXP3/discounts-advertisement-seen-
 
 //home screeen displayed on home
 function Home({ navigation }) {
-  const [search, setSearch]=React.useState('');
-  const [responseData, setResponsedata]=React.useState([]);
-  
-useEffect(()=>{
-  const url = "https://613efce6e9d92a0017e1738f.mockapi.io/items";
-  axios.get(url).then((response)=>{
-    // console.log("resoponse to ", response.data[0]);
-    // response=JSON.parse(response);
-      // responseData=response.data;
-     //r console.log('i am in the response dAta ', responseData)
-setResponsedata(response.data);
+  const [search, setSearch] = React.useState('');
+  const [responseData, setResponsedata] = React.useState([]);
+  const cart=useContext(CartContext)
+  useEffect(() => {
+    const url = "https://613efce6e9d92a0017e1738f.mockapi.io/items";
+    axios.get(url).then((response) => {
 
-console.log(typeof(responseData));
-  }).catch(()=>{
-    console.log('i am in the error')
-  })
+      setResponsedata(response.data);
 
-},[])
-const renderItem=({item})=>{
+      // sorting of the data on the basis of priority has been done
 
-  return(
-<Item name= {item.name} 
-  prices={item.prices} 
-  avatar={item.avatar} />
-  )
-  
-}
+      let sorted = [...responseData];
+      sorted = sorted.sort((a, b) => {
+        return (a.priority >= b.priority)
+      })
+      // console.log("sorted data us ",sorted)
+
+
+
+      // setResponsedata([...sorted]);
+      // setResponsedata(sorted)
+      console.log(typeof (responseData[24]));
+    }).catch(() => {
+      console.log('i am in the error')
+    })
+
+  }, [])
+  const renderItem = ({ item }) => {
+
+    return (
+      <Item name={item.name}
+        prices={item.prices}
+        avatar={item.avatar} />
+    )
+
+  }
 
   return (
     <ScrollView>
-      {/* // gome screen container for the list of items */}
-      {/* <SearchBar placeholder="Search Here " 
-      onChangeText={()=>{setSearch(search)}}
-       value={search} /> */}
+
 
       <View style={styles.searchContainer}>
-        <Image 
-        style={styles.imageStyle}  
-        source={searchIcon}
+        <Image
+          style={styles.imageStyle}
+          source={searchIcon}
         />
         <TextInput
-        style={styles.input}
+          style={styles.input}
         />
       </View>
-      
+
 
       <View style={styles.container}>
-        <FlatList data={responseData} 
-        renderItem={renderItem}
+        <FlatList data={responseData}
+          renderItem={renderItem}
           horizontal={true}
-          keyExtractor={item=>item.id}
+          keyExtractor={item => item.id}
         />
       </View>
+      <Text> Price of the cart is  {cart.price}</Text>
+      <Text>Length of the cart is {cart.cartlen}</Text>
       <View>
 
         <Image
@@ -123,25 +132,34 @@ const Drawer = createDrawerNavigator();
 
 
 export default function App() {
+  // const [counter, dispatch] = useReducer(reducer, initialState);
+const [price,setPrice]=useState(0)
+const [pricelen, setPricelen]=useState(0);
+  const add=(props)=>{
+  setPrice(parseInt(props)+parseInt(price));
+  setPricelen(pricelen+1);
+}
+
+const sub=(props)=>{
+  setPrice(parseInt(price)-parseInt(props));
+  setPricelen(pricelen-1);
+}
+
+
+
+
+  
   return (
+    <CartContext.Provider value={{price: price, cartlen:pricelen, add: add,sub:sub}}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="HomeDrawer" component={HomeScreen} />
+          <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
 
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="HomeDrawer" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
+      </NavigationContainer>
 
-
-      {/* <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="settings" component={SettingsScreen} />
-      </Drawer.Navigator> */}
-
-
-    </NavigationContainer>
-
-
-
+    </CartContext.Provider>
   );
 }
 
@@ -169,19 +187,19 @@ const styles = StyleSheet.create(
     },
     input: {
       padding: 6,
-      flex:1, 
-      
+      flex: 1,
+
 
     },
     searchContainer: {
-     
+
       flexDirection: 'row',
       borderRadius: 30,
       height: 30,
       borderColor: 'black',
       borderWidth: 2,
     },
-    
+
 
 
   }

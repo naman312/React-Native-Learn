@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image } from "react-native";
 import harpic from '../android/app/src/assets/harpic.jpg'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from "react-native-paper";
-const Itemlist = ({name,prices,avatar}) => {
+import { CartContext } from "../ContextStore/CardContext";
 
+
+
+const Itemlist = ({name,prices,avatar}) => {
+    // const [cart,setCart]=useContext(CartContext);
+    const cart=useContext(CartContext)
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('500 ml');
     const [items, setItems] = useState([
       { label: '1 L', value: '1 L' },
       { label: '2 L', value: '2 L' }
     ]);
-  
+   
+//   const addToCart = () => {
+//     const products = { name: name, price: prices };
+//     setCart(currentState => [...currentState, products]);
+//   }
+// const remToCart=()=>{
+//   const products={name: name, price: prices};
+//   setCart(currentState=>[...currentState,products]);
+// }
+
+
     return (
       
     <View style={styles.itemContainer}>
@@ -54,9 +69,22 @@ const Itemlist = ({name,prices,avatar}) => {
               <View style={{ flex: 1, flexDirection: 'row' }}>
                 <Button
                   style={{ backgroundColor: 'white', borderColor: 'red', borderWidth: 2, width: 10, height: 30 }}
-                
+                onPress={()=>{
+                  console.log('button pressed subtract')
+                    cart.sub(prices);
+                }}
                 />
-                <Button style={{ backgroundColor: 'yellow', width: 12, height: 30  }} />
+                <Button style={{ backgroundColor: 'yellow', width: 12, height: 30  }} 
+                title="+" 
+                onPress={()=>
+                  {console.log('button pressed add')
+                  console.log('befor prices', cart.price);
+                    cart.add(prices);
+                    console.log(cart.price);
+                    console.log("cartlen",cart.cartlen)
+
+                }}
+                />
               </View>
 
             </View>

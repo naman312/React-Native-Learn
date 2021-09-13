@@ -135,13 +135,22 @@ export default function App() {
   // const [counter, dispatch] = useReducer(reducer, initialState);
 const [price,setPrice]=useState(0)
 const [pricelen, setPricelen]=useState(0);
-  const add=(props)=>{
-  setPrice(parseInt(props)+parseInt(price));
+const [ids,setIds]=useState([]);
+  const add=(prices,id)=>{
+  setPrice(parseInt(prices)+parseInt(price));
+     
+    if(ids.includes(id)==false){
+      setIds([...ids,id])
+    }
+console.log("ids array ",ids)
   setPricelen(pricelen+1);
 }
 
-const sub=(props)=>{
-  setPrice(parseInt(price)-parseInt(props));
+const sub=(prices,id)=>{
+  if(ids.includes(id)==false || price<=0){
+    return ;
+  }
+  setPrice(parseInt(price)-parseInt(prices));
   setPricelen(pricelen-1);
 }
 
@@ -150,7 +159,7 @@ const sub=(props)=>{
 
   
   return (
-    <CartContext.Provider value={{price: price, cartlen:pricelen, add: add,sub:sub}}>
+    <CartContext.Provider value={{ ids:ids, price: price, cartlen:pricelen, add: add,sub:sub}}>
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="HomeDrawer" component={HomeScreen} />

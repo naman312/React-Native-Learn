@@ -71,7 +71,7 @@ const Itemlist = ({name,prices,avatar}) => {
                   style={{ backgroundColor: 'white', borderColor: 'red', borderWidth: 2, width: 10, height: 30 }}
                 onPress={()=>{
                   console.log('button pressed subtract')
-                    cart.sub(prices);
+                    cart.sub(prices,name);
                 }}
                 />
                 <Button style={{ backgroundColor: 'yellow', width: 12, height: 30  }} 
@@ -79,7 +79,7 @@ const Itemlist = ({name,prices,avatar}) => {
                 onPress={()=>
                   {console.log('button pressed add')
                   console.log('befor prices', cart.price);
-                    cart.add(prices);
+                    cart.add(prices,name);
                     console.log(cart.price);
                     console.log("cartlen",cart.cartlen)
 

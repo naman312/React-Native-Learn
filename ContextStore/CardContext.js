@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export const CartContext = React.createContext({price: 0, cartlen:0, add:()=>{},suv:()=>{} });
+export const CartContext = React.createContext({ ids:[], price: 0, cartlen:0, add:()=>{},suv:()=>{} });
 
 // export const CartProvider = (props) => {
 //   const [cart, setCart] = useState(0);

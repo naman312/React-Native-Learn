@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Imag
 import harpic from '../android/app/src/assets/harpic.jpg'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from "react-native-paper";
-const Itemlist = ({id,name}) => {
+const Itemlist = ({name,prices,avatar}) => {
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('500 ml');
@@ -22,8 +22,7 @@ const Itemlist = ({id,name}) => {
               style={styles.categoriesItemText}>
               Offer
             </Text>
-            <Image
-              source={harpic}
+            <Image source={{uri: avatar}} 
               style={styles.categoriesItemImage}
               resizeMode="contain"
             />
@@ -32,7 +31,7 @@ const Itemlist = ({id,name}) => {
             <Text style={{ marginBottom: 5, fontWeight: '400' }}>{name} </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
   
-              <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}145</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}{prices}</Text>
               <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}154</Text>
               <Text style={{ fontSize: 15, marginBottom: 5, color: "rgba(0, 0, 0.5, 0.9)", fontWeight: '400' }}>({'\u20B9'}290/L)</Text>
   

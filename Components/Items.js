@@ -66,14 +66,7 @@ const Itemlist = ({name,prices,avatar}) => {
                 />
                 <Button style={{ backgroundColor: 'yellow', width: 12, height: 30  }} 
                 title="+" 
-                onPress={()=>
-                  {console.log('button pressed add')
-                  console.log('befor prices', cart.price);
-                    cart.add(prices,name);
-                    console.log(cart.price);
-                    console.log("cartlen",cart.cartlen)
-
-                }}
+                onPress={()=> {cart.add(prices,name)}}
                 />
               </View>
 

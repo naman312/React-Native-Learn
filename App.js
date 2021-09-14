@@ -20,48 +20,35 @@ export default function App() {
     setPrice(parseInt(prices) + parseInt(price));
     // ids.includes(id) == false
     console.log('nas is ')
-    if (map1.hasOwnProperty(String((id)))==false ) {
-
-      console.log('i am in if statement ');
-      
-      setIds([...ids, id])
-      let map2={};
-      map2[id]=1;
-      console.log("map2 after insertion",map2)
-      // const map2 = { id: 1 };
-      setMap1({ ...map1, ...map2 });
-      console.log('all map----------------',map1)
+    if (map1.hasOwnProperty(String((id))) == false) {
+          setIds([...ids, id])
+          let map2 = {};
+          map2[id] = 1;
+          setMap1({ ...map1, ...map2 });
+     
     } else {
-        console.log('else statement ')
-      let freq = parseInt(map1[id]);
-     // console.log("freq is ",freq)
-      //freq++;
-      let map3={};
-      map3[id]=parseInt(freq)+parseInt(1)
-
-      // const map3 = { id: parseInt(freq)+parseInt(1) }
-     // console.log("map 3 i s",map3);
-      setMap1({ ...map1, ...map3 });
-
+      
+          let freq = parseInt(map1[id]);
+          let map3 = {};
+          map3[id] = parseInt(freq) + parseInt(1)
+          setMap1({ ...map1, ...map3 });
     }
-    //console.log("ids array ", ids)
     setPricelen(pricelen + 1);
 
-    
+
   }
   // subtracting items from carts
   const sub = (prices, id1) => {
-    const id=id1;
-   // console.log('output of the map fucntion ', map1);
-    // ids.includes(id) == false
-    console.log("map1[id]  ",map1[id]);
-    if (price <= 0 || map1.hasOwnProperty(id)==false||parseInt(map1[id]) <= 0) {
+    const id = id1;
+
+
+    if (price <= 0 || map1.hasOwnProperty(id) == false || parseInt(map1[id]) <= 0) {
       return;
     } else {
       const freq = parseInt(map1[id]);
-      let map2={};
-          map2[id]=parseInt(freq)-parseInt(1)
-          // const map2 = { id: parseInt(freq)-parseInt(1) };
+      let map2 = {};
+      map2[id] = parseInt(freq) - parseInt(1)
+
       setMap1({ ...map1, ...map2 });
     }
 

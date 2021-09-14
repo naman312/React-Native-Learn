@@ -110,7 +110,8 @@ console.log('i am called ib the switch',switchparam)
 
        
       </ScrollView>
-       <CartStrip/>
+      {cart.cartlen>0 && <CartStrip/>}
+      
        </>
     )
   }

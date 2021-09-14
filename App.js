@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Text, View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
+import {  StyleSheet,ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import Home from './Screens/Home'
 import { CartContext } from './ContextStore/CardContext';
 import SettingsScreen from './Screens/SettingsScreen';
 import HomeScreen from './Screens/HomeScreen';
@@ -15,6 +13,8 @@ export default function App() {
   const [price, setPrice] = useState(0)
   const [pricelen, setPricelen] = useState(0);
   const [ids, setIds] = useState([]);
+
+  // adding items to the carts
   const add = (prices, id) => {
     setPrice(parseInt(prices) + parseInt(price));
 
@@ -24,7 +24,7 @@ export default function App() {
     console.log("ids array ", ids)
     setPricelen(pricelen + 1);
   }
-
+  // subtracting items from carts
   const sub = (prices, id) => {
     if (ids.includes(id) == false || price <= 0) {
       return;
@@ -32,6 +32,8 @@ export default function App() {
     setPrice(parseInt(price) - parseInt(prices));
     setPricelen(pricelen - 1);
   }
+
+
   return (
     <CartContext.Provider value={{ ids: ids, price: price, cartlen: pricelen, add: add, sub: sub }}>
       <NavigationContainer>
@@ -73,7 +75,6 @@ const styles = StyleSheet.create(
 
     },
     searchContainer: {
-
       flexDirection: 'row',
       borderRadius: 30,
       height: 30,

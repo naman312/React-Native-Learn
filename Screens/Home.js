@@ -98,7 +98,8 @@ export default function Home({ navigation }) {
   
         {/* // priority - 3 of the app view  */}
       
-        <SliderCity images={images} />
+
+        <SliderCity prior3={prior3} />
   
       </ScrollView>
     )

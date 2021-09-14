@@ -1,13 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {View} from 'react-native';
-
 import { SliderBox } from "react-native-image-slider-box";
 
 
 
 
 
-export default function SliderCity({ images }) {
+export default function SliderCity({prior3 }) {
+  // destructing into image arrays
+
+  const images=[];
+  prior3.map((obj)=>{
+      images.push(obj.avatar);
+  })
+
+console.log('images of ', images)
   return (
 
     <View>

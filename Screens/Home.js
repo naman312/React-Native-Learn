@@ -10,7 +10,7 @@ import searchIcon from '../android/app/src/assets/search.png';
 import axios from 'axios'
 import { CartContext } from '../ContextStore/CardContext';
 import ListRendered from '../Components/ListRendered';
-
+import Banner from '../Components/Banner';
 
 
 const images = ["https://c8.alamy.com/comp/2B1BXP3/discounts-advertisement-seen-in-a-retail-shop-inside-harbour-city-mall-one-of-the-hong-kongs-premier-shopping-destination-usually-full-of-tourists-and-shoppersthe-deadly-coronavirus-known-as-covid-19-has-caused-most-industries-factories-and-malls-in-china-shut-down-more-than-50-million-people-in-quarantine-with-countries-restriction-on-entries-to-control-the-spread-of-the-virus-as-well-as-more-than-25000-flight-cancellations-worldwide-long-dependent-on-the-spending-of-chinese-buyers-remind-home-tourism-had-it-biggest-hit-2B1BXP3.jpg",
@@ -118,14 +118,16 @@ export default function Home({ navigation }) {
   
         {/*  // priority -2 of the app view */}
       
-        <View>
+        {/* <View>
           {(prior2.length > 0) ?
             <Image
               source={{ uri: (prior2.length > 0) && prior2[0].avatar }}
               style={styles.img}
             /> : <ActivityIndicator />}
   
-        </View>
+        </View> */}
+
+        <Banner prior2={prior2} />
   
         {/* // priority - 3 of the app view  */}
         <View>

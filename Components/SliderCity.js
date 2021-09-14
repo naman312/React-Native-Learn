@@ -20,7 +20,7 @@ console.log('images of ', images)
     <View>
       <SliderBox
         images={images}
-        sliderBoxHeight={200}
+        sliderBoxHeight={350}
         // onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
         dotColor="#FFEE58"
         inactiveDotColor="#90A4AE"

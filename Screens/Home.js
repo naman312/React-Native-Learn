@@ -11,8 +11,7 @@ import axios from 'axios'
 import { CartContext } from '../ContextStore/CardContext';
 import ListRendered from '../Components/ListRendered';
 import Banner from '../Components/Banner';
-
-
+import SliderCity from '../Components/SliderCity';
 const images = ["https://c8.alamy.com/comp/2B1BXP3/discounts-advertisement-seen-in-a-retail-shop-inside-harbour-city-mall-one-of-the-hong-kongs-premier-shopping-destination-usually-full-of-tourists-and-shoppersthe-deadly-coronavirus-known-as-covid-19-has-caused-most-industries-factories-and-malls-in-china-shut-down-more-than-50-million-people-in-quarantine-with-countries-restriction-on-entries-to-control-the-spread-of-the-virus-as-well-as-more-than-25000-flight-cancellations-worldwide-long-dependent-on-the-spending-of-chinese-buyers-remind-home-tourism-had-it-biggest-hit-2B1BXP3.jpg",
   "https://images.financialexpress.com/2020/12/mallu1200.jpg",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvD-jE5-60oxfDkmTV7E_DvvC_MRjK7DiqlwXciY-k72vaGdP8tqmq_9aAcuBBnpYt2kw&usqp=CAU",
@@ -73,18 +72,6 @@ export default function Home({ navigation }) {
         console.log('i am in the error',e)
       })
     }, [])
-    
-    
-    
-    const renderItem = ({ item }) => {
-  
-      return (
-        <Item name={item.name}
-          prices={item.prices}
-          avatar={item.avatar} />
-      )
-  
-    }
   
     return (
       <ScrollView>
@@ -99,17 +86,6 @@ export default function Home({ navigation }) {
           />
         </View>
         {/* //priority-1 of the app view */}
-  
-  
-        {/* <View style={styles.container}>
-  
-          <FlatList data={prior1}
-            renderItem={renderItem}
-            horizontal={true}
-            keyExtractor={(prior1) ? item => item.id : null}
-          />
-
-        </View> */}
        
         <ListRendered prior1={prior1} />
 
@@ -118,28 +94,11 @@ export default function Home({ navigation }) {
   
         {/*  // priority -2 of the app view */}
       
-        {/* <View>
-          {(prior2.length > 0) ?
-            <Image
-              source={{ uri: (prior2.length > 0) && prior2[0].avatar }}
-              style={styles.img}
-            /> : <ActivityIndicator />}
-  
-        </View> */}
-
         <Banner prior2={prior2} />
   
         {/* // priority - 3 of the app view  */}
-        <View>
-          <SliderBox
-            images={images}
-            sliderBoxHeight={200}
-            // onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
-            dotColor="#FFEE58"
-            inactiveDotColor="#90A4AE"
-          />
-  
-        </View>
+      
+        <SliderCity images={images} />
   
       </ScrollView>
     )

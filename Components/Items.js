@@ -1,6 +1,5 @@
 import React, { useState,useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image } from "react-native";
-import harpic from '../android/app/src/assets/harpic.jpg'
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from "react-native-paper";
 import { CartContext } from "../ContextStore/CardContext";
@@ -8,7 +7,7 @@ import { CartContext } from "../ContextStore/CardContext";
 
 
 const Itemlist = ({name,prices,avatar}) => {
-    // const [cart,setCart]=useContext(CartContext);
+   
     const cart=useContext(CartContext)
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('500 ml');
@@ -17,15 +16,6 @@ const Itemlist = ({name,prices,avatar}) => {
       { label: '2 L', value: '2 L' }
     ]);
    
-//   const addToCart = () => {
-//     const products = { name: name, price: prices };
-//     setCart(currentState => [...currentState, products]);
-//   }
-// const remToCart=()=>{
-//   const products={name: name, price: prices};
-//   setCart(currentState=>[...currentState,products]);
-// }
-
 
     return (
       

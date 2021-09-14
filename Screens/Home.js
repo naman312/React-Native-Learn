@@ -98,8 +98,7 @@ console.log('i am called ib the switch',switchparam)
        
         { prior1.length>0?handleSwitch(prior1[0].type,prior1):<ActivityIndicator/> } 
         
-        <Text> Price of the cart is  {cart.price}</Text>
-        <Text>Length of the cart is {cart.cartlen}</Text>
+       
   
         {/*  // priority -2 of the app view */}
             {prior2.length>0?handleSwitch(prior2[0].type,prior2):<ActivityIndicator/>}

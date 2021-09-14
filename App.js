@@ -16,36 +16,33 @@ const images = ["https://c8.alamy.com/comp/2B1BXP3/discounts-advertisement-seen-
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvD-jE5-60oxfDkmTV7E_DvvC_MRjK7DiqlwXciY-k72vaGdP8tqmq_9aAcuBBnpYt2kw&usqp=CAU",
   "https://source.unsplash.com/1024x768/?tree"]
 
-
-
-
-
-
-
 //home screeen displayed on home
 function Home({ navigation }) {
   const [search, setSearch] = React.useState('');
   const [responseData, setResponsedata] = React.useState([]);
+ // const [sortData, setSortdata]=React.useState([]);
   const cart=useContext(CartContext)
   useEffect(() => {
     const url = "https://613efce6e9d92a0017e1738f.mockapi.io/items";
     axios.get(url).then((response) => {
 
-      setResponsedata(response.data);
+      // setResponsedata(()=>(response.data));
 
       // sorting of the data on the basis of priority has been done
 
-      let sorted = [...responseData];
-      sorted = sorted.sort((a, b) => {
+      let sorted =response.data;
+       sorted.sort((a, b) => {
         return (a.priority >= b.priority)
       })
-      // console.log("sorted data us ",sorted)
+      console.log("sorted data ", sorted)
+      setResponsedata(sorted)
+      // console.log("sorted data us ",)
 
 
 
       // setResponsedata([...sorted]);
       // setResponsedata(sorted)
-      console.log(typeof (responseData[24]));
+      // console.log(typeof (responseData[24]));
     }).catch(() => {
       console.log('i am in the error')
     })

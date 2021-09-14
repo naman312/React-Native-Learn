@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Text, View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import Item from '../Components/Items';
-import { SliderBox } from "react-native-image-slider-box";
+import { Text, View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
+
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import searchIcon from '../android/app/src/assets/search.png';
 import axios from 'axios'
@@ -12,10 +8,6 @@ import { CartContext } from '../ContextStore/CardContext';
 import ListRendered from '../Components/ListRendered';
 import Banner from '../Components/Banner';
 import SliderCity from '../Components/SliderCity';
-const images = ["https://c8.alamy.com/comp/2B1BXP3/discounts-advertisement-seen-in-a-retail-shop-inside-harbour-city-mall-one-of-the-hong-kongs-premier-shopping-destination-usually-full-of-tourists-and-shoppersthe-deadly-coronavirus-known-as-covid-19-has-caused-most-industries-factories-and-malls-in-china-shut-down-more-than-50-million-people-in-quarantine-with-countries-restriction-on-entries-to-control-the-spread-of-the-virus-as-well-as-more-than-25000-flight-cancellations-worldwide-long-dependent-on-the-spending-of-chinese-buyers-remind-home-tourism-had-it-biggest-hit-2B1BXP3.jpg",
-  "https://images.financialexpress.com/2020/12/mallu1200.jpg",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvD-jE5-60oxfDkmTV7E_DvvC_MRjK7DiqlwXciY-k72vaGdP8tqmq_9aAcuBBnpYt2kw&usqp=CAU",
-  "https://source.unsplash.com/1024x768/?tree"]
 
 
 //home screeen displayed on home
@@ -26,7 +18,7 @@ export default function Home({ navigation }) {
     const [prior2, setPrior2] = React.useState([]);
     const [prior3, setPrior3] = React.useState([]);
     const [prior4, setPrior4] = React.useState([]);
-  
+    const [loading,setLoading]=React.useState(true);
     const cart = useContext(CartContext)
     
     // Api Calling for extracting data
@@ -34,7 +26,7 @@ export default function Home({ navigation }) {
       const url = "https://613efce6e9d92a0017e1738f.mockapi.io/items";
       axios.get(url).then((response) => {
         // console.log("response",response)
-        let sorted = response.data;
+        let sorted = [...response.data];
   
         let prio1 = sorted.filter((obj) => {
           return (obj.priority == 1)
@@ -48,11 +40,13 @@ export default function Home({ navigation }) {
           return (obj.priority == 3)
   
         })
-        prio3 = prio3.map((obj) => {
-          return {
-            avatar: obj.avatar
-          }
-        })
+
+        console.log("----------------", prio3)
+        // prio3 = prio3.map((obj) => {
+        //   return {
+        //     avatar: obj.avatar
+        //   }
+        // })
   
         let prio4 = sorted.filter((obj) => {
           return (obj.priority == 9)
@@ -72,6 +66,22 @@ export default function Home({ navigation }) {
         console.log('i am in the error',e)
       })
     }, [])
+    const handleSwitch=(switchparam,prior)=>{
+console.log('i am called ib the switch',switchparam)
+       
+        switch(switchparam){
+                case 'Flatlist': 
+                    return  <ListRendered prior1={prior} />;
+                case 'slider':
+                    return <SliderCity prior3={prior} />    ;
+                case  'banner':
+                    return <Banner prior2={prior} />;
+                default:
+                    return <ActivityIndicator/>
+            }
+    }
+
+
   
     return (
       <ScrollView>
@@ -84,22 +94,24 @@ export default function Home({ navigation }) {
           <TextInput
             style={styles.input}
           />
+
+
+
         </View>
         {/* //priority-1 of the app view */}
        
-        <ListRendered prior1={prior1} />
-
+        { prior1.length>0?handleSwitch(prior1[0].type,prior1):<ActivityIndicator/> } 
+        
         <Text> Price of the cart is  {cart.price}</Text>
         <Text>Length of the cart is {cart.cartlen}</Text>
   
         {/*  // priority -2 of the app view */}
+            {prior2.length>0?handleSwitch(prior2[0].type,prior2):<ActivityIndicator/>}
       
-        <Banner prior2={prior2} />
-  
+      
         {/* // priority - 3 of the app view  */}
-      
+            {prior3.length>0?handleSwitch(prior3[0].type,prior3):<ActivityIndicator/>}    
 
-        <SliderCity prior3={prior3} />
   
       </ScrollView>
     )

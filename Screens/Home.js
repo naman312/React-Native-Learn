@@ -8,7 +8,7 @@ import { CartContext } from '../ContextStore/CardContext';
 import ListRendered from '../Components/ListRendered';
 import Banner from '../Components/Banner';
 import SliderCity from '../Components/SliderCity';
-
+import CartStrip from '../Components/CartStrip';
 
 //home screeen displayed on home
 export default function Home({ navigation }) {
@@ -41,11 +41,7 @@ export default function Home({ navigation }) {
         })
 
         console.log("----------------", prio3)
-        // prio3 = prio3.map((obj) => {
-        //   return {
-        //     avatar: obj.avatar
-        //   }
-        // })
+        
   
         let prio4 = sorted.filter((obj) => {
           return (obj.priority == 9)
@@ -83,6 +79,7 @@ console.log('i am called ib the switch',switchparam)
 
   
     return (
+        <>
       <ScrollView>
   {/*search bat */}
         <View style={styles.searchContainer}>
@@ -111,8 +108,10 @@ console.log('i am called ib the switch',switchparam)
         {/* // priority - 3 of the app view  */}
             {prior3.length>0?handleSwitch(prior3[0].type,prior3):<ActivityIndicator/>}    
 
-  
+       
       </ScrollView>
+       <CartStrip/>
+       </>
     )
   }
 
@@ -123,6 +122,12 @@ const styles = StyleSheet.create(
         backgroundColor: 'white',
         flexDirection: 'row',
         height: 250,
+       position: 'absolute', 
+       left: 0, 
+       right: 0, 
+       bottom: 0,
+        
+        elevation: 11
       },
       img: {
         height: 200,

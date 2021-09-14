@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {  StyleSheet,ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CartContext } from './ContextStore/CardContext';
@@ -37,7 +36,9 @@ export default function App() {
   return (
     <CartContext.Provider value={{ ids: ids, price: price, cartlen: pricelen, add: add, sub: sub }}>
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator 
+          
+        >
           <Tab.Screen name="HomeDrawer" component={HomeScreen} options={{header:()=>null}}  />
           <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>

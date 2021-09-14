@@ -1,14 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Button, Text, View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React from 'react';
+import {  View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
 import Item from '../Components/Items';
-import { SliderBox } from "react-native-image-slider-box";
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import searchIcon from '../android/app/src/assets/search.png';
-import axios from 'axios'
-import { CartContext } from '../ContextStore/CardContext';
+
 
 export default function ListRendered({prior1}){
 

@@ -38,7 +38,7 @@ export default function App() {
     <CartContext.Provider value={{ ids: ids, price: price, cartlen: pricelen, add: add, sub: sub }}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="HomeDrawer" component={HomeScreen} />
+          <Tab.Screen name="HomeDrawer" component={HomeScreen} options={{header:()=>null}}  />
           <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>

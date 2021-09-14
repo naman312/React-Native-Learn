@@ -18,7 +18,6 @@ export default function Home({ navigation }) {
     const [prior2, setPrior2] = React.useState([]);
     const [prior3, setPrior3] = React.useState([]);
     const [prior4, setPrior4] = React.useState([]);
-    const [loading,setLoading]=React.useState(true);
     const cart = useContext(CartContext)
     
     // Api Calling for extracting data

@@ -9,6 +9,10 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import searchIcon from '../android/app/src/assets/search.png';
 import axios from 'axios'
 import { CartContext } from '../ContextStore/CardContext';
+import ListRendered from '../Components/ListRendered';
+
+
+
 const images = ["https://c8.alamy.com/comp/2B1BXP3/discounts-advertisement-seen-in-a-retail-shop-inside-harbour-city-mall-one-of-the-hong-kongs-premier-shopping-destination-usually-full-of-tourists-and-shoppersthe-deadly-coronavirus-known-as-covid-19-has-caused-most-industries-factories-and-malls-in-china-shut-down-more-than-50-million-people-in-quarantine-with-countries-restriction-on-entries-to-control-the-spread-of-the-virus-as-well-as-more-than-25000-flight-cancellations-worldwide-long-dependent-on-the-spending-of-chinese-buyers-remind-home-tourism-had-it-biggest-hit-2B1BXP3.jpg",
   "https://images.financialexpress.com/2020/12/mallu1200.jpg",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvD-jE5-60oxfDkmTV7E_DvvC_MRjK7DiqlwXciY-k72vaGdP8tqmq_9aAcuBBnpYt2kw&usqp=CAU",
@@ -24,15 +28,13 @@ export default function Home({ navigation }) {
     const [prior3, setPrior3] = React.useState([]);
     const [prior4, setPrior4] = React.useState([]);
   
-  
-  
-    // let [images, setImages] = React.useState([]);
-    // const [sortData, setSortdata]=React.useState([]);
     const cart = useContext(CartContext)
+    
+    // Api Calling for extracting data
     useEffect(() => {
       const url = "https://613efce6e9d92a0017e1738f.mockapi.io/items";
       axios.get(url).then((response) => {
-  
+        // console.log("response",response)
         let sorted = response.data;
   
         let prio1 = sorted.filter((obj) => {
@@ -58,7 +60,7 @@ export default function Home({ navigation }) {
   
         })
   
-        console.log('i am in prio4 ', prio4[0].avatar)
+       
         setPrior1(prio1);
         setPrior2(prio2);
         setPrior3(prio3);
@@ -67,10 +69,13 @@ export default function Home({ navigation }) {
   
         setResponsedata(sorted)
   
-      }).catch(() => {
-        console.log('i am in the error')
+      }).catch((e) => {
+        console.log('i am in the error',e)
       })
     }, [])
+    
+    
+    
     const renderItem = ({ item }) => {
   
       return (
@@ -83,7 +88,7 @@ export default function Home({ navigation }) {
   
     return (
       <ScrollView>
-  
+  {/*search bat */}
         <View style={styles.searchContainer}>
           <Image
             style={styles.imageStyle}
@@ -96,20 +101,23 @@ export default function Home({ navigation }) {
         {/* //priority-1 of the app view */}
   
   
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
   
           <FlatList data={prior1}
             renderItem={renderItem}
             horizontal={true}
             keyExtractor={(prior1) ? item => item.id : null}
           />
-        </View>
-  
+
+        </View> */}
+       
+        <ListRendered prior1={prior1} />
+
         <Text> Price of the cart is  {cart.price}</Text>
         <Text>Length of the cart is {cart.cartlen}</Text>
   
         {/*  // priority -2 of the app view */}
-        {/* prior4?prior4[0].avatar:null */}
+      
         <View>
           {(prior2.length > 0) ?
             <Image

@@ -5,9 +5,10 @@ import { Button, Text, View, StyleSheet, FlatList, Image, ActivityIndicator } fr
 
 export default function Banner({prior2}) {
     return (
-        <View>
+        <View style={{background: 'white'}}>
             {(prior2.length > 0) ?
                 <Image
+                    
                     source={{ uri: (prior2.length > 0) && prior2[0].avatar }}
                     style={styles.img}
                 /> : <ActivityIndicator />}
@@ -27,7 +28,7 @@ const styles = StyleSheet.create(
       img: {
         height: 200,
         width: 400,
-        resizeMode: 'contain'
+        resizeMode: 'repeat'
       },
       imageStyle: {
         padding: 5,

@@ -145,11 +145,17 @@ let DetailView = () => {
                                                     onPress={() => { cart.add(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }}
                                                 />
                                             </View>
-                                            <View>
+                                            {/* <View>
                                                 <Button style={{ backgroundColor: 'red', width: 42, height: 50, marginRight: 10 }}
                                                     title={String(cart.map1[onekey])}
                                                 />
+                                            </View> */}
+
+                                            <View style={{ width: 42, height: 50 }}>
+                                                <Text style={styles.disp}> {cart.map1[onekey]} </Text>
                                             </View>
+
+
 
                                         </View>
 
@@ -211,10 +217,10 @@ const styles = StyleSheet.create({
         width: 700,
         resizeMode: 'contain',
     },
-    categoriesItemText:{
+    categoriesItemText: {
         color: 'white'
-      },
-      categoriesItem: {
+    },
+    categoriesItem: {
         backgroundColor: "#d6300f",
         marginRight: 6,
         height: 110,
@@ -223,7 +229,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "white",
         alignItems: "center",
-      },
+    },
     categoriesItemImage: {
         height: 70,
         width: "100%",
@@ -233,5 +239,17 @@ const styles = StyleSheet.create({
         maxWidth: 100,
         height: 35,
 
+    },
+    disp: {
+        justifyContent: 'center',
+        alignContent: 'center',
+        textAlign: 'center',
+
+        backgroundColor: 'red',
+        fontSize: 26,
+        fontWeight: 'bold',
+        color: 'white',
+        height: 35,
+        width: 50
     }
 });

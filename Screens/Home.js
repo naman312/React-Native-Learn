@@ -80,7 +80,7 @@ console.log('i am called ib the switch',switchparam)
   
     return (
         <>
-      <ScrollView>
+      <ScrollView style={{backgroundColor: 'white'}}>
   {/*search bat */}
         <View style={styles.searchContainer}>
           <Image
@@ -135,9 +135,13 @@ const styles = StyleSheet.create(
         resizeMode: 'stretch'
       },
       imageStyle: {
-        padding: 5,
+       // paddingLeft: 5,
+        // alignContent: 'center',
+        // justifyContent: 'center',
+        // paddingTop: 0 ,
         marginLeft: 10,
-        marginTop: 4,
+        marginTop: 1,
+       
         height: 25,
         width: 25,
         resizeMode: 'stretch',
@@ -150,12 +154,14 @@ const styles = StyleSheet.create(
   
       },
       searchContainer: {
-  
+        marginTop: 5,
+        marginBottom: 5,
         flexDirection: 'row',
         borderRadius: 30,
         height: 30,
         borderColor: 'black',
         borderWidth: 2,
+        backgroundColor: 'white'
       },
   
   

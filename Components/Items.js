@@ -22,19 +22,15 @@ const Itemlist = ({ name, prices, avatar }) => {
 
     <View style={styles.itemContainer}>
       <View style={styles.categoriesItem}>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={2}
-          style={styles.categoriesItemText}>
-          Offer
-        </Text>
+        
         <Image source={{ uri: avatar }}
           style={styles.categoriesItemImage}
-          resizeMode="contain"
+          height={200}
+          
         />
       </View>
       <View style={{ marginLeft: 30 }} >
-        <Text style={{ marginBottom: 5, fontWeight: '400' }}>{name} </Text>
+        <Text style={{ marginBottom: 5, fontWeight: '400',textAlign: 'center' }}>{name} </Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
           <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}{prices}</Text>
           <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}154</Text>
@@ -68,11 +64,10 @@ const Itemlist = ({ name, prices, avatar }) => {
               />
             </View>
             <View style={{ width: 42, height: 50 }}>
-              { }
-              <Button
-                title={show ? show : '0'}
+                  <Text style={styles.disp}> {show?show:0} </Text>
+              <View>
 
-              />
+              </View>
             </View>
 
 
@@ -96,7 +91,7 @@ const styles = StyleSheet.create({
 
   box: {
     width: '100%',
-    height: '43%',
+    height: '90%',
 
   },
   itemContainer: {
@@ -108,7 +103,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     borderBottomColor: "rgba(0, 0, 0, 0.1)",
     borderBottomWidth: 2,
-
+    height: 350
 
   },
   img: {
@@ -121,25 +116,38 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   categoriesItem: {
-    backgroundColor: "#d6300f",
+    marginTop: 0,
     marginRight: 6,
-    height: 110,
-    width: 110,
+    height: 210,
+    width: 150,
     borderRadius: 6,
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: "white",
-    alignItems: "center",
+    
   },
   categoriesItemImage: {
-    height: 70,
+    height: 190,
+    margin: 0,
     width: "100%",
     backgroundColor: 'white'
 
   },
   dropdown: {
+    
     maxWidth: 80,
     height: 35,
-
+  },
+  disp:{
+    justifyContent: 'center',
+    alignContent: 'center',
+    textAlign: 'center',
+    
+    backgroundColor: 'red',
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: 'white',
+    height: 35,
+    width: 50
   }
 });
 

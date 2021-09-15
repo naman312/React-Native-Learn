@@ -10,7 +10,8 @@ export default function ListRendered({prior1}){
         return (
           <Item name={item.name}
             prices={item.prices}
-            avatar={item.avatar} />
+            avatar={item.avatar} 
+            />
         )
     
       }
@@ -36,7 +37,7 @@ const styles = StyleSheet.create(
         marginLeft: 0,
         backgroundColor: 'white',
         flexDirection: 'row',
-        height: 250,
+        height: 350,
       },
       img: {
         height: 200,

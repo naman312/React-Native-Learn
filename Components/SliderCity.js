@@ -21,7 +21,7 @@ console.log('images of ', images)
       <SliderBox
         images={images}
         resizeMethod={'resize'}
-        resizeMode={'contain'}
+        resizeMode={'stretch'}
         sliderBoxHeight={270}
         // onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
         dotColor="#FFEE58"

@@ -57,7 +57,6 @@ const Itemlist = ({ name, prices, avatar }) => {
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <View style={{ width: 42, height: 50, marginRight: 10 }}>
               <Button
-
                 title="-"
                 onPress={() => { cart.sub(prices, name,avatar) }}
               />
@@ -118,19 +117,23 @@ const styles = StyleSheet.create({
     width: 700,
     resizeMode: 'contain',
   },
+  categoriesItemText:{
+    color: 'white'
+  },
   categoriesItem: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
+    backgroundColor: "#d6300f",
     marginRight: 6,
     height: 110,
     width: 110,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.1)",
+    borderColor: "white",
     alignItems: "center",
   },
   categoriesItemImage: {
     height: 70,
     width: "100%",
+    backgroundColor: 'white'
 
   },
   dropdown: {

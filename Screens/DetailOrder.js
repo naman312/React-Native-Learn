@@ -211,16 +211,19 @@ const styles = StyleSheet.create({
         width: 700,
         resizeMode: 'contain',
     },
-    categoriesItem: {
-        backgroundColor: "rgba(0, 0, 0, 0.05)",
+    categoriesItemText:{
+        color: 'white'
+      },
+      categoriesItem: {
+        backgroundColor: "#d6300f",
         marginRight: 6,
         height: 110,
         width: 110,
         borderRadius: 6,
         borderWidth: 1,
-        borderColor: "rgba(0, 0, 0, 0.1)",
+        borderColor: "white",
         alignItems: "center",
-    },
+      },
     categoriesItemImage: {
         height: 70,
         width: "100%",

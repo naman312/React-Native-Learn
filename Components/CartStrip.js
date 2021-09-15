@@ -7,11 +7,11 @@ export default function CartStrip({navigation,show}) {
     const cart = useContext(CartContext)
     return (
         <View style={styles.container}>
-            <Text style={styles.txt}>Total items:- {cart.cartlen}</Text>
-            <Text style={styles.txt}>Total Price:-  {cart.price}</Text>
+            <Text style={styles.txt}>{cart.cartlen} Items</Text>
+            <Text style={styles.txtprice}>Rs.{cart.price}</Text>
             <View style={styles.detail}>
                {
-                   (show===true)?<Button title="View Details" onPress={()=>navigation.navigate('DetailOrder')} />:null
+                   (show===true)?<Button title="View Details" onPress={()=>navigation.navigate('DetailOrder')} />:<Button title="Confirm Order"/>
                }
                 
             </View>
@@ -78,6 +78,14 @@ const styles = StyleSheet.create(
         maxWidth: 100,
         height: 35,
         
+      },
+      txtprice:{
+        color: 'white',
+        fontSize: 22,
+        paddingTop: 20,
+        marginLeft: 0,
+        marginRight: 60,
+        fontWeight: 'bold'
       }
     }
 )

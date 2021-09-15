@@ -14,10 +14,10 @@ const Itemlist = ({ name, prices, avatar }) => {
     { label: '1 L', value: '1 L' },
     { label: '2 L', value: '2 L' }
   ]);
-let show=0;
-if(cart.cartlen>0){
-  show=JSON.stringify(cart.map1[name]);
-}
+  let show = 0;
+  if (cart.cartlen > 0) {
+    show = JSON.stringify(cart.map1[name]);
+  }
   return (
 
     <View style={styles.itemContainer}>
@@ -59,25 +59,25 @@ if(cart.cartlen>0){
               <Button
 
                 title="-"
-                onPress={() => { cart.sub(prices, name) }}
+                onPress={() => { cart.sub(prices, name,avatar) }}
               />
             </View>
-            <View style={{ width: 42, height: 50,marginRight: 10 }}>
+            <View style={{ width: 42, height: 50, marginRight: 10 }}>
               <Button
                 title="+"
-                onPress={() => { cart.add(prices, name) }}
+                onPress={() => { cart.add(prices, name,avatar) }}
               />
             </View>
             <View style={{ width: 42, height: 50 }}>
-              {}
+              { }
               <Button
-                title={show?show:'0'}
-                
+                title={show ? show : '0'}
+
               />
             </View>
 
 
-          <View>
+            <View>
 
             </View>
 

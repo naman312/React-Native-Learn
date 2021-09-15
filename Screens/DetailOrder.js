@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { View, Text, Button, TouchableNativeFeedback, StyleSheet, Image,ScrollView } from 'react-native';
+import { View, Text, Button, TouchableNativeFeedback, StyleSheet, Image, ScrollView } from 'react-native';
 import harpic from "../android/app/src/assets/harpic.jpg"
 import { CartContext } from '../ContextStore/CardContext'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -104,13 +104,13 @@ let DetailView = () => {
         <>
             {
                 Object.keys(cart.map1).map((onekey, i) => {
-                    const str = onekey + "                                                 " + cart.map1[onekey];
+                    const str = onekey + "   " + cart.map1[onekey];
                     return (
                         <React.Fragment key={i}>
                             <View style={styles.itemContainer}>
                                 <View style={styles.categoriesItem}>
                                     <Text ellipsizeMode="tail" numberOfLines={2} style={styles.categoriesItemText}> Offer </Text>
-                                    <Image source={harpic} style={styles.categoriesItemImage} resizeMode="contain" />
+                                    <Image source={{ uri: cart.img1[onekey].img }} style={styles.categoriesItemImage} resizeMode="contain" />
                                 </View>
 
 
@@ -118,8 +118,8 @@ let DetailView = () => {
                                     <Text style={{ marginBottom: 5, fontWeight: '400' }}>{onekey} </Text>
 
                                     <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
-                                        <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}145</Text>
-                                        <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}154</Text>
+                                        <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}{cart.img1[onekey].price}</Text>
+                                        <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}145</Text>
                                         <Text style={{ fontSize: 15, marginBottom: 5, color: "rgba(0, 0, 0.5, 0.9)", fontWeight: '400' }}>({'\u20B9'}290/L)</Text>
                                     </View>
 
@@ -133,10 +133,24 @@ let DetailView = () => {
                                             />
                                         </View>
                                         <View style={{ flex: 1, flexDirection: 'row' }}>
-                                          
-                                            <Button style={{ backgroundColor: 'red' }}
-                                                title={String(cart.map1[onekey])}
-                                            />
+                                            <View style={{ width: 32, height: 50, marginRight: 10 }}>
+                                                <Button
+                                                    title="-"
+                                                    onPress={() => { cart.sub(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }}
+                                                />
+                                            </View>
+                                            <View style={{ width: 32, height: 50, marginRight: 10 }}>
+                                                <Button
+                                                    title="+"
+                                                    onPress={() => { cart.add(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }}
+                                                />
+                                            </View>
+                                            <View>
+                                                <Button style={{ backgroundColor: 'red', width: 42, height: 50, marginRight: 10 }}
+                                                    title={String(cart.map1[onekey])}
+                                                />
+                                            </View>
+
                                         </View>
 
                                     </View>
@@ -160,12 +174,12 @@ function DetailOrder() {
     // const totalPrice = "Total Price     " + cart.price;
     // const totalItem = "Total Item  " + cart.cartlen;
     return (
-      <>  
-        <ScrollView>
-                 <DetailView />
-        </ScrollView>
-           <CartStrip/>
-    </>
+        <>
+            <ScrollView>
+                <DetailView />
+            </ScrollView>
+            <CartStrip />
+        </>
     )
 }
 
@@ -175,9 +189,7 @@ export default DetailOrder
 
 const styles = StyleSheet.create({
     container: {
-
         marginTop: 1,
-
     },
     box: {
         width: '100%',
@@ -185,7 +197,6 @@ const styles = StyleSheet.create({
     },
     itemContainer: {
         alignItems: 'center',
-
         flex: 1,
         flexDirection: "row",
         flexWrap: "wrap",

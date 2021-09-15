@@ -1,14 +1,21 @@
 import React, { useContext } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { Button, View, Text, StyleSheet } from 'react-native'
 import { CartContext } from "../ContextStore/CardContext";
+import DetailOrder from '../Screens/DetailOrder';
 
-
-export default function CartStrip() {
-    const cart=useContext(CartContext)
+export default function CartStrip({navigation}) {
+    const cart = useContext(CartContext)
     return (
         <View style={styles.container}>
             <Text style={styles.txt}>Total items:- {cart.cartlen}</Text>
             <Text style={styles.txt}>Total Price:-  {cart.price}</Text>
+            <View style={styles.detail}>
+                <Button
+                    title="View Details"
+                    onPress={()=>navigation.navigate('DetailOrder')}
+                />
+            </View>
+
         </View>
     )
 
@@ -25,33 +32,14 @@ const styles = StyleSheet.create(
         },
         txt: {
             color: 'white',
-            fontSize: 20,
+            fontSize: 12,
             padding: 5,
-            
-        },
-        imageStyle: {
-            padding: 5,
-            marginLeft: 10,
-            marginTop: 4,
-            height: 25,
-            width: 25,
-            resizeMode: 'stretch',
-            alignItems: 'center',
-        },
-        input: {
-            padding: 6,
-            flex: 1,
-
 
         },
-        searchContainer: {
-
-            flexDirection: 'row',
-            borderRadius: 30,
-            height: 30,
-            borderColor: 'black',
-            borderWidth: 2,
-        },
+        detail: {
+            width: 100,
+            marginLeft: 115
+        }
 
 
 

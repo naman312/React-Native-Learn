@@ -109,7 +109,7 @@ console.log('i am called ib the switch',switchparam)
 
        
       </ScrollView>
-      {cart.cartlen>0 && <CartStrip/>}
+      {cart.cartlen>0 && <CartStrip navigation={navigation}/>}
       
        </>
     )

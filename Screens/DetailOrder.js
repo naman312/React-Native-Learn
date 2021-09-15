@@ -178,7 +178,7 @@ function DetailOrder() {
             <ScrollView>
                 <DetailView />
             </ScrollView>
-            <CartStrip />
+            <CartStrip show={false} />
         </>
     )
 }

@@ -109,7 +109,7 @@ let DetailView = () => {
                         <React.Fragment key={i}>
                             <View style={styles.itemContainer}>
                                 <View style={styles.categoriesItem}>
-                                    <Text ellipsizeMode="tail" numberOfLines={2} style={styles.categoriesItemText}> Offer </Text>
+                                   
                                     <Image source={{ uri: cart.img1[onekey].img }} style={styles.categoriesItemImage} resizeMode="contain" />
                                 </View>
 
@@ -181,7 +181,7 @@ function DetailOrder() {
     // const totalItem = "Total Item  " + cart.cartlen;
     return (
         <>
-            <ScrollView>
+            <ScrollView style={{backgroundColor: 'white'}}>
                 <DetailView />
             </ScrollView>
             <CartStrip show={false} />
@@ -221,17 +221,18 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     categoriesItem: {
-        backgroundColor: "#d6300f",
+        backgroundColor: "white",
         marginRight: 6,
-        height: 110,
+        height: 100,
         width: 110,
-        borderRadius: 6,
-        borderWidth: 1,
+        
+       
         borderColor: "white",
         alignItems: "center",
+        marginBottom: 20
     },
     categoriesItemImage: {
-        height: 70,
+        height: 100,
         width: "100%",
 
     },

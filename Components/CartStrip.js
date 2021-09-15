@@ -11,7 +11,7 @@ export default function CartStrip({navigation,show}) {
             <Text style={styles.txtprice}>Rs.{cart.price}</Text>
             <View style={styles.detail}>
                {
-                   (show===true)?<Button title="View Details" onPress={()=>navigation.navigate('DetailOrder')} />:<Button title="Confirm Order"/>
+                   (show===true)?<Button title="View Details" onPress={()=>navigation.navigate('DetailOrder')}  />:<Button title="Confirm Order"/>
                }
                 
             </View>
@@ -26,6 +26,8 @@ const styles = StyleSheet.create(
             backgroundColor: '#fc8c03',
             flexDirection: 'row',
             height: 50,
+            justifyContent: 'center',
+    
         },
         txt: {
             color: 'white',
@@ -34,8 +36,22 @@ const styles = StyleSheet.create(
 
         },
         detail: {
-            width: 100,
-            marginLeft: 115
+            width: 80,
+            height: 35,
+            marginLeft: 100,
+            borderRadius: 19,
+            alignContent: 'center',
+            marginTop: 7,
+
+            justifyContent: 'center',
+            fontSize: 6
+
+
+        },
+        btn:{
+            borderColor: 'white',
+            
+            borderRadius: 39
         },
         box: {
             width: '100%',

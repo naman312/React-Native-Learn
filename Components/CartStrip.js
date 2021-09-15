@@ -5,10 +5,13 @@ import DetailOrder from '../Screens/DetailOrder';
 
 export default function CartStrip({navigation,show}) {
     const cart = useContext(CartContext)
+    //{cart.cartlen}
     return (
         <View style={styles.container}>
-            <Text style={styles.txt}>{cart.cartlen} Items</Text>
+            <Text style={styles.txt}>Total:- </Text>
             <Text style={styles.txtprice}>Rs.{cart.price}</Text>
+            <Text style={styles.txt}>Qty:- </Text>
+            <Text style={styles.txtprice}>{cart.cartlen}</Text>
             <View style={styles.detail}>
                {
                    (show===true)?<Button title="View Details" onPress={()=>navigation.navigate('DetailOrder')}  />:<Button title="Confirm Order"/>
@@ -33,6 +36,7 @@ const styles = StyleSheet.create(
             color: 'white',
             fontSize: 12,
             padding: 5,
+            textAlignVertical: 'bottom'
 
         },
         detail: {
@@ -98,9 +102,9 @@ const styles = StyleSheet.create(
       txtprice:{
         color: 'white',
         fontSize: 22,
-        paddingTop: 20,
+        textAlignVertical: 'bottom',
         marginLeft: 0,
-        marginRight: 60,
+        marginRight: 20,
         fontWeight: 'bold'
       }
     }

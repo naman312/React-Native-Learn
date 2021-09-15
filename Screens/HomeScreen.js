@@ -26,7 +26,7 @@ export default function HomeScreen({ navigation }) {
   
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen name="Home" component={Home}
-        
+          navigation={navigation}
         options={{
           title: 'My home',
           headerStyle: {

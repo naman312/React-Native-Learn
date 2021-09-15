@@ -1,8 +1,47 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image, Button } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, Pressable, TouchableNativeFeedback, View, Image, Button } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { CartContext } from "../ContextStore/CardContext";
 
+
+
+let btnHandler = () => {
+
+}
+
+let BtnContainer = () => {
+
+  return (
+
+
+    <Pressable style={{ backgroundColor: 'red', height: 35, width: 125, borderRadius: 12, alignItems: 'center', padding: 6 }} onPress={() => { btnHandler() }}>
+      <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Add To Cart</Text>
+    </Pressable>
+
+
+  )
+}
+
+let BtnAddSub = () => {
+  return (
+<View style={{ backgroundColor: 'red', height: 35, width: 125, borderRadius: 12, alignItems: 'center', padding: 6, flexDirection: 'row' }}>
+        <Pressable  onPress={() => { btnHandler() }} style={{width: 35}}>    
+            <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold',fontSize: 15 }}>-</Text>
+        </Pressable>
+
+        <Pressable  onPress={() => { btnHandler() }} style={{width: 35, backgroundColor: 'white', height: 34,paddingTop:8}}>    
+            <Text style={{  textAlign: 'center', fontWeight: 'bold' }}>QTY</Text>
+        </Pressable>
+
+        <Pressable  onPress={() => { btnHandler() }} style={{width: 35}}>    
+            <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold',fontSize:15,marginLeft: 10 }}>+</Text>
+        </Pressable>
+
+</View>
+    
+
+  )
+}
 
 
 const Itemlist = ({ name, prices, avatar }) => {
@@ -22,15 +61,15 @@ const Itemlist = ({ name, prices, avatar }) => {
 
     <View style={styles.itemContainer}>
       <View style={styles.categoriesItem}>
-        
+
         <Image source={{ uri: avatar }}
           style={styles.categoriesItemImage}
           height={200}
-          
+
         />
       </View>
       <View style={{ marginLeft: 30 }} >
-        <Text style={{ marginBottom: 5, fontWeight: '400',textAlign: 'center' }}>{name} </Text>
+        <Text style={{ marginBottom: 5, fontWeight: '400', textAlign: 'center' }}>{name} </Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
           <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}{prices}</Text>
           <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}154</Text>
@@ -51,6 +90,7 @@ const Itemlist = ({ name, prices, avatar }) => {
           </View>
 
           <View style={{ flex: 1, flexDirection: 'row' }}>
+            {/*             
             <View style={{ width: 42, height: 50, marginRight: 10 }}>
               <Button
                 title="-"
@@ -65,15 +105,11 @@ const Itemlist = ({ name, prices, avatar }) => {
             </View>
             <View style={{ width: 42, height: 50 }}>
                   <Text style={styles.disp}> {show?show:0} </Text>
-              <View>
-
-              </View>
-            </View>
-
-
-            <View>
-
-            </View>
+           
+             </View>
+ */}
+            {/* <BtnContainer /> */}
+            <BtnAddSub/>
 
           </View>
 
@@ -112,7 +148,7 @@ const styles = StyleSheet.create({
     width: 700,
     resizeMode: 'contain',
   },
-  categoriesItemText:{
+  categoriesItemText: {
     color: 'white'
   },
   categoriesItem: {
@@ -123,7 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 0,
     borderColor: "white",
-    
+
   },
   categoriesItemImage: {
     height: 190,
@@ -133,15 +169,15 @@ const styles = StyleSheet.create({
 
   },
   dropdown: {
-    
+
     maxWidth: 80,
     height: 35,
   },
-  disp:{
+  disp: {
     justifyContent: 'center',
     alignContent: 'center',
     textAlign: 'center',
-    
+
     backgroundColor: 'red',
     fontSize: 26,
     fontWeight: 'bold',

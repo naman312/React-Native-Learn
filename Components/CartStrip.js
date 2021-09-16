@@ -30,6 +30,7 @@ const styles = StyleSheet.create(
             flexDirection: 'row',
             height: 50,
             justifyContent: 'center',
+            paddingBottom: 5
     
         },
         txt: {

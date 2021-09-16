@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { View, Text, Button, TouchableNativeFeedback, StyleSheet, Image, ScrollView,Pressable } from 'react-native';
+import { View, Text, Button, TouchableNativeFeedback, StyleSheet, Image, ScrollView, Pressable } from 'react-native';
 import harpic from "../android/app/src/assets/harpic.jpg"
 import { CartContext } from '../ContextStore/CardContext'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -101,12 +101,12 @@ let DetailView = () => {
         //     </View>
         // </>
 
-        <>
+        <View style={{ backgroundColor: 'white' }} >
             {
                 Object.keys(cart.map1).map((onekey, i) => {
                     const str = onekey + "   " + cart.map1[onekey];
                     return (
-                        <React.Fragment key={String(i)+String(onekey)}>
+                        <View key={String(i) + String(onekey)} >
                             <View style={styles.itemContainer}>
                                 <View style={styles.categoriesItem}>
 
@@ -132,14 +132,14 @@ let DetailView = () => {
                                                 style={styles.dropdown}
                                             />
                                         </View>
-                                        
+
                                         <View style={{ backgroundColor: 'red', height: 35, width: 125, borderRadius: 12, alignItems: 'center', padding: 6, flexDirection: 'row' }}>
                                             <Pressable onPress={() => { cart.sub(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }} style={{ width: 35 }}>
                                                 <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 15 }}>-</Text>
                                             </Pressable>
 
-                                            <Pressable  style={{ width: 35, backgroundColor: 'white', height: 34, paddingTop: 8 }}>
-                                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>{parseInt(cart.map1[onekey])>0 ? cart.map1[onekey] : 0}</Text>
+                                            <Pressable style={{ width: 35, backgroundColor: 'white', height: 34, paddingTop: 8 }}>
+                                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>{parseInt(cart.map1[onekey]) > 0 ? cart.map1[onekey] : 0}</Text>
                                             </Pressable>
 
                                             <Pressable onPress={() => { cart.add(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }} style={{ width: 35 }}>
@@ -154,12 +154,35 @@ let DetailView = () => {
                                 </View>
                             </View>
 
-                        </React.Fragment>
+                        </View>
                     )
                 })
             }
 
-        </>
+            <View style={{ marginLeft: 5, marginTop: 30 }}>
+                <View>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 2, marginBottom: 2, marginLeft: 5 }}>Billing Details </Text>
+                </View>
+                <View style={{ flexDirection: 'row' }} >
+                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }} >(Price {cart.cartlen} Qty)   </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 200 }} >  {cart.price} </Text>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+
+                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }}>Delivery </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 245 }} >  Free </Text>
+
+                    <Text style={{ letterSpacing: 1, marginLeft: 180 }}>  {cart.price}</Text>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+
+                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }}>Total  </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 260 }}>  {cart.price}</Text>
+                </View>
+            </View>
+
+
+        </View>
     )
 }
 
@@ -171,7 +194,7 @@ function DetailOrder() {
     // const totalItem = "Total Item  " + cart.cartlen;
     return (
         <>
-            <ScrollView style={{ backgroundColor: 'white' }}>
+            <ScrollView style={{}}>
                 <DetailView />
             </ScrollView>
             <CartStrip show={false} />

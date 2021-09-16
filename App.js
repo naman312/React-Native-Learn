@@ -4,8 +4,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CartContext } from './ContextStore/CardContext';
 import SettingsScreen from './Screens/SettingsScreen';
 import HomeScreen from './Screens/HomeScreen';
-
+import CustomScreen from './Screens/CustomScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+import DetailOrder from './Screens/DetailOrder';
 const Tab = createBottomTabNavigator();
+
+function TabScreen(){
+  return (
+
+    <Tab.Navigator >
+    <Tab.Screen name="HomeDrawer" component={HomeScreen} options={{ header: () => null }} />
+    <Tab.Screen name="Setting" component={SettingsScreen} />
+  </Tab.Navigator>
+  )
+}
 
 export default function App() {
   // const [counter, dispatch] = useReducer(reducer, initialState);
@@ -13,68 +25,68 @@ export default function App() {
   const [pricelen, setPricelen] = useState(0);
   const [ids, setIds] = useState([]);
   const [map1, setMap1] = useState({});
-  const [img1,setImg1]=useState({});
+  const [img1, setImg1] = useState({});
 
   // adding items to the carts
-  const add = (prices, id,img) => {
+  const add = (prices, id, img) => {
     console.log('map in addition ', map1);
     setPrice(parseInt(prices) + parseInt(price));
     // ids.includes(id) == false
     console.log('nas is ')
     if (map1.hasOwnProperty(String((id))) == false) {
-          setIds([...ids, id])
-          let map2 = {};
-          map2[id] = 1;
-          setMap1({ ...map1, ...map2 });
-         //images with id 
-          let img2={};
-         //--------------changing object structure------
+      setIds([...ids, id])
+      let map2 = {};
+      map2[id] = 1;
+      setMap1({ ...map1, ...map2 });
+      //images with id 
+      let img2 = {};
+      //--------------changing object structure------
 
-       img2[id]={img: img, price: parseInt(prices)};
+      img2[id] = { img: img, price: parseInt(prices) };
 
 
-          // img2[id]['img']=img;
-          // img2[id]['price']=parseInt(prices);
+      // img2[id]['img']=img;
+      // img2[id]['price']=parseInt(prices);
 
-          setImg1({...img1,...img2});
-     
+      setImg1({ ...img1, ...img2 });
+
 
     } else {
-      
-          let freq = parseInt(map1[id]);
-          let map3 = {};
-          map3[id] = parseInt(freq) + parseInt(1)
-          setMap1({ ...map1, ...map3 });
 
-          
+      let freq = parseInt(map1[id]);
+      let map3 = {};
+      map3[id] = parseInt(freq) + parseInt(1)
+      setMap1({ ...map1, ...map3 });
+
+
     }
     setPricelen(pricelen + 1);
     console.log("images and id ", img1)
   }
   // subtracting items from carts
-  const sub = (prices, id1,img) => {
+  const sub = (prices, id1, img) => {
     const id = id1;
 
     if (price <= 0 || map1.hasOwnProperty(id) == false || parseInt(map1[id]) <= 0) {
       return;
     } else {
       const freq = parseInt(map1[id]);
-      
+
       let map2 = {};
       map2[id] = parseInt(freq) - parseInt(1)
-       
+
       setMap1({ ...map1, ...map2 });
       //images 2 
-      
+
       //--------------changing object structure------
-      let img2={};
+      let img2 = {};
 
-      img2[id]={img: img, price: parseInt(prices)};
+      img2[id] = { img: img, price: parseInt(prices) };
 
-          // img2[id]['img']=img;
-          // img2[id]['price']=parseInt(prices);
-     
-      setImg1({...img1,...img2});
+      // img2[id]['img']=img;
+      // img2[id]['price']=parseInt(prices);
+
+      setImg1({ ...img1, ...img2 });
 
 
     }
@@ -83,14 +95,15 @@ export default function App() {
     setPricelen(pricelen - 1);
 
   }
-
+  const Stack = createStackNavigator();
   return (
-    <CartContext.Provider value={{ ids: ids, price: price, cartlen: pricelen, add: add, sub: sub, map1: map1,img1: img1 }}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="HomeDrawer" component={HomeScreen} options={{ header: () => null }} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
-        </Tab.Navigator>
+    <CartContext.Provider value={{ ids: ids, price: price, cartlen: pricelen, add: add, sub: sub, map1: map1, img1: img1 }}>
+      <NavigationContainer >
+        <Stack.Navigator>
+          <Stack.Screen name="TabScreen" component={TabScreen} options={{ header: () => null }} />
+          <Stack.Screen name="Detail Order" component={DetailOrder} />
+        </Stack.Navigator>
+
       </NavigationContainer>
     </CartContext.Provider>
   );

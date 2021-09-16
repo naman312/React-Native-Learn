@@ -1,20 +1,36 @@
 import React, { useContext } from 'react'
-import { Button, View, Text, StyleSheet } from 'react-native'
+import { Button, View, Text, StyleSheet,Pressable } from 'react-native'
 import { CartContext } from "../ContextStore/CardContext";
 import DetailOrder from '../Screens/DetailOrder';
 
+
 export default function CartStrip({navigation,show}) {
-    const cart = useContext(CartContext)
+ 
+let Btn=({title})=>{
+  if(title=='View')
+  return (
+    <Pressable style={{borderRadius: 5, height: 40, width: 80,backgroundColor: 'white'}} onPress={()=>navigation.navigate('Detail Order')}>
+      <Text style={{color: 'red',paddingLeft: 20,paddingTop: 8,fontSize: 16,fontWeight: 'bold'}}>{title}</Text>
+    </Pressable>
+  )
+  return(
+    <Pressable style={{borderRadius: 5, height: 40, width: 80,backgroundColor: 'white'}}>
+    <Text style={{color: 'red',paddingLeft: 8,paddingTop: 8,fontSize: 16,fontWeight: 'bold'}}>{title}</Text>
+  </Pressable>
+  )
+}   
+  
+  const cart = useContext(CartContext)
     //{cart.cartlen}
     return (
         <View style={styles.container}>
-            <Text style={styles.txt}>Total:- </Text>
+            <Text style={styles.txt}>Total  </Text>
             <Text style={styles.txtprice}>Rs.{cart.price}</Text>
-            <Text style={styles.txt}>Qty:- </Text>
+            <Text style={styles.txt}>Qty </Text>
             <Text style={styles.txtprice}>{cart.cartlen}</Text>
             <View style={styles.detail}>
                {
-                   (show===true)?<Button title="View Details" onPress={()=>navigation.navigate('DetailOrder')}  />:<Button title="Confirm Order"/>
+                   (show===true)?<Btn title='View'/>:<Btn title='Confirm'/>
                }
                 
             </View>
@@ -36,7 +52,7 @@ const styles = StyleSheet.create(
         txt: {
             color: 'white',
             fontSize: 12,
-            padding: 5,
+            paddingBottom: 3,
             textAlignVertical: 'bottom',
             marginLeft: 2
 
@@ -44,7 +60,7 @@ const styles = StyleSheet.create(
         detail: {
             width: 80,
             height: 35,
-            marginLeft: 100,
+            marginLeft: 90,
             borderRadius: 19,
             alignContent: 'center',
             marginTop: 7,

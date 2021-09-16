@@ -4,7 +4,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Image from 'react-native'
 import Home from '../Screens/Home'
 import SettingsScreen from '../Screens/SettingsScreen';
-import DetailOrder from './DetailOrder'; 
 import harpic from '../android/app/src/assets/harpic.jpg'
 
 
@@ -37,10 +36,10 @@ export default function HomeScreen({ navigation }) {
             fontWeight: 'bold',
           },
         }}
+
         
         />
         <Drawer.Screen name="settings" component={SettingsScreen} />
-        <Drawer.Screen name="DetailOrder" component={DetailOrder}/>
       </Drawer.Navigator>
   
   

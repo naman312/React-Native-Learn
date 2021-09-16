@@ -152,8 +152,8 @@ const styles = StyleSheet.create(
         // alignContent: 'center',
         // justifyContent: 'center',
         // paddingTop: 0 ,
-        marginLeft: 10,
-        marginTop: 2,
+        marginLeft: 3,
+        marginTop: 3,
        
         height: 25,
         width: 25,
@@ -168,12 +168,12 @@ const styles = StyleSheet.create(
       },
       searchContainer: {
         
-        marginLeft: 15,
-        width: 365,
+        marginLeft: 24,
+        width: 350,
         marginTop: 20,
         marginBottom: 10,
         flexDirection: 'row',
-        borderRadius: 30,
+        borderRadius: 10,
         height: 30,
         borderColor: 'black',
         borderWidth: 0.4,

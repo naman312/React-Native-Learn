@@ -15,7 +15,7 @@ let Btn=({title})=>{
   )
   return(
     <Pressable style={{borderRadius: 5, height: 40, width: 80,backgroundColor: 'white'}}>
-    <Text style={{color: 'red',paddingLeft: 8,paddingTop: 8,fontSize: 16,fontWeight: 'bold'}}>{title}</Text>
+    <Text style={{color: 'red',paddingLeft: 11,paddingTop: 10,fontSize: 16,fontWeight: 'bold'}}>{title}</Text>
   </Pressable>
   )
 }   

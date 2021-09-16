@@ -46,7 +46,7 @@ const styles = StyleSheet.create(
   
       },
       searchContainer: {
-  
+        
         flexDirection: 'row',
         borderRadius: 30,
         height: 30,

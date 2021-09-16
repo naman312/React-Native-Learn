@@ -82,6 +82,8 @@ console.log('i am called ib the switch',switchparam)
         <>
       <ScrollView contentContainerStyle={{backgroundColor: 'white'}}>
   {/*search bat */}
+       
+      
         <View style={styles.searchContainer}>
           <Image
             style={styles.imageStyle}
@@ -90,9 +92,9 @@ console.log('i am called ib the switch',switchparam)
           <TextInput
             style={styles.input}
           />
-
-
-
+        </View>
+        <View style={styles.offers}>
+        <Text style={styles.offtxt}>Exclusive Offers for you </Text>
         </View>
         {/* //priority-1 of the app view */}
        
@@ -116,7 +118,18 @@ console.log('i am called ib the switch',switchparam)
   }
 
 const styles = StyleSheet.create(
-    {
+    { 
+      offers:{
+        marginLeft: 25,
+        marginTop: 10,
+        marginBottom: 10
+       
+    },
+    
+    offtxt:{
+      fontSize: 20,
+      fontWeight: 'bold'
+    },
       container: {
         marginLeft: 0,
         backgroundColor: 'white',
@@ -154,10 +167,11 @@ const styles = StyleSheet.create(
   
       },
       searchContainer: {
+        
         marginLeft: 13,
         width: 365,
-        marginTop: 6,
-        marginBottom: 5,
+        marginTop: 30,
+        marginBottom: 10,
         flexDirection: 'row',
         borderRadius: 30,
         height: 30,

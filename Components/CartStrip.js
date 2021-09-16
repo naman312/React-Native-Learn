@@ -36,7 +36,8 @@ const styles = StyleSheet.create(
             color: 'white',
             fontSize: 12,
             padding: 5,
-            textAlignVertical: 'bottom'
+            textAlignVertical: 'bottom',
+            marginLeft: 2
 
         },
         detail: {
@@ -101,7 +102,7 @@ const styles = StyleSheet.create(
       },
       txtprice:{
         color: 'white',
-        fontSize: 22,
+        fontSize: 18,
         textAlignVertical: 'bottom',
         marginLeft: 0,
         marginRight: 20,

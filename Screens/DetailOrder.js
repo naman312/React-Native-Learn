@@ -165,19 +165,19 @@ let DetailView = () => {
                 </View>
                 <View style={{ flexDirection: 'row' }} >
                     <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }} >(Price {cart.cartlen} Qty)   </Text>
-                    <Text style={{ letterSpacing: 1, marginLeft: 200 }} >  {cart.price} </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 190 }} >  Rs. {cart.price} </Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
 
                     <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }}>Delivery </Text>
-                    <Text style={{ letterSpacing: 1, marginLeft: 245 }} >  Free </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 232 }} >  Free </Text>
 
                     <Text style={{ letterSpacing: 1, marginLeft: 180 }}>  {cart.price}</Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
 
                     <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }}>Total  </Text>
-                    <Text style={{ letterSpacing: 1, marginLeft: 260 }}>  {cart.price}</Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 250 }}>  Rs. {cart.price}</Text>
                 </View>
             </View>
 

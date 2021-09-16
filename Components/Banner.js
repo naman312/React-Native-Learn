@@ -28,7 +28,7 @@ const styles = StyleSheet.create(
       img: {
         height: 200,
         width: 400,
-        resizeMode: 'repeat'
+        resizeMode: 'contain'
       },
       imageStyle: {
         padding: 5,

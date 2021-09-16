@@ -71,7 +71,7 @@ const Itemlist = ({ name, prices, avatar }) => {
 
         <Image source={{ uri: avatar }}
           style={styles.categoriesItemImage}
-          height={200}
+          height={150}
 
         />
       </View>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     borderBottomColor: "rgba(0, 0, 0, 0.1)",
     borderBottomWidth: 2,
-    height: 350
+    height: 300
 
   },
   img: {
@@ -177,15 +177,16 @@ const styles = StyleSheet.create({
   categoriesItem: {
     marginTop: 0,
     marginRight: 6,
-    height: 210,
+    height: 170,
     width: 150,
     borderRadius: 6,
     borderWidth: 0,
     borderColor: "white",
 
+
   },
   categoriesItemImage: {
-    height: 190,
+    height: 150,
     margin: 0,
     width: "100%",
     backgroundColor: 'white'

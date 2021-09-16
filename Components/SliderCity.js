@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {View} from 'react-native';
+import {View,StyleSheet} from 'react-native';
 import { SliderBox } from "react-native-image-slider-box";
 
 
@@ -17,18 +17,29 @@ export default function SliderCity({prior3 }) {
 console.log('images of ', images)
   return (
 
-    <View>
+    <View style={styles.container}>
       <SliderBox
         images={images}
         resizeMethod={'resize'}
-        resizeMode={'repeat'}
-        sliderBoxHeight={270}
+        resizeMode={'stretch'}
+        sliderBoxHeight={170}
         // onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
         dotColor="#FFEE58"
         inactiveDotColor="#90A4AE"
+      
       />
 
     </View>
   )
 
 }
+
+const styles=StyleSheet.create({
+    container:{
+      paddingTop: 10,
+      height: 190,
+      backgroundColor: 'rgba(0, 0, 0, 0.05)'
+    }
+    
+    
+})

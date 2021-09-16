@@ -37,7 +37,8 @@ const styles = StyleSheet.create(
         marginLeft: 0,
         backgroundColor: 'white',
         flexDirection: 'row',
-        height: 350,
+        height: 300,
+        marginBottom: 15
       },
       img: {
         height: 200,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create(
   
       },
       searchContainer: {
-        width: '50',
+      
         flexDirection: 'row',
         borderRadius: 30,
         height: 30,

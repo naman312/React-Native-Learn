@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { View, Text, Button, TouchableNativeFeedback, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, Button, TouchableNativeFeedback, StyleSheet, Image, ScrollView,Pressable } from 'react-native';
 import harpic from "../android/app/src/assets/harpic.jpg"
 import { CartContext } from '../ContextStore/CardContext'
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -106,10 +106,10 @@ let DetailView = () => {
                 Object.keys(cart.map1).map((onekey, i) => {
                     const str = onekey + "   " + cart.map1[onekey];
                     return (
-                        <React.Fragment key={i}>
+                        <React.Fragment key={String(i)+String(onekey)}>
                             <View style={styles.itemContainer}>
                                 <View style={styles.categoriesItem}>
-                                   
+
                                     <Image source={{ uri: cart.img1[onekey].img }} style={styles.categoriesItemImage} resizeMode="contain" />
                                 </View>
 
@@ -132,32 +132,22 @@ let DetailView = () => {
                                                 style={styles.dropdown}
                                             />
                                         </View>
-                                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                                            <View style={{ width: 32, height: 50, marginRight: 10 }}>
-                                                <Button
-                                                    title="-"
-                                                    onPress={() => { cart.sub(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }}
-                                                />
-                                            </View>
-                                            <View style={{ width: 32, height: 50, marginRight: 10 }}>
-                                                <Button
-                                                    title="+"
-                                                    onPress={() => { cart.add(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }}
-                                                />
-                                            </View>
-                                            {/* <View>
-                                                <Button style={{ backgroundColor: 'red', width: 42, height: 50, marginRight: 10 }}
-                                                    title={String(cart.map1[onekey])}
-                                                />
-                                            </View> */}
+                                        
+                                        <View style={{ backgroundColor: 'red', height: 35, width: 125, borderRadius: 12, alignItems: 'center', padding: 6, flexDirection: 'row' }}>
+                                            <Pressable onPress={() => { cart.sub(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }} style={{ width: 35 }}>
+                                                <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 15 }}>-</Text>
+                                            </Pressable>
 
-                                            <View style={{ width: 42, height: 50 }}>
-                                                <Text style={styles.disp}> {cart.map1[onekey]} </Text>
-                                            </View>
+                                            <Pressable  style={{ width: 35, backgroundColor: 'white', height: 34, paddingTop: 8 }}>
+                                                <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>{parseInt(cart.map1[onekey])>0 ? cart.map1[onekey] : 0}</Text>
+                                            </Pressable>
 
-
+                                            <Pressable onPress={() => { cart.add(cart.img1[onekey].price, onekey, cart.img1[onekey].img) }} style={{ width: 35 }}>
+                                                <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 15, marginLeft: 10 }}>+</Text>
+                                            </Pressable>
 
                                         </View>
+
 
                                     </View>
 
@@ -181,7 +171,7 @@ function DetailOrder() {
     // const totalItem = "Total Item  " + cart.cartlen;
     return (
         <>
-            <ScrollView style={{backgroundColor: 'white'}}>
+            <ScrollView style={{ backgroundColor: 'white' }}>
                 <DetailView />
             </ScrollView>
             <CartStrip show={false} />
@@ -225,8 +215,8 @@ const styles = StyleSheet.create({
         marginRight: 6,
         height: 100,
         width: 110,
-        
-       
+
+
         borderColor: "white",
         alignItems: "center",
         marginBottom: 20

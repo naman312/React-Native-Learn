@@ -57,6 +57,13 @@ const Itemlist = ({ name, prices, avatar }) => {
   if (cart.cartlen > 0) {
     show = JSON.stringify(cart.map1[name]);
   }
+
+
+
+
+  
+
+
   return (
 
     <View style={styles.itemContainer}>
@@ -110,13 +117,13 @@ const Itemlist = ({ name, prices, avatar }) => {
  */}
             {/* <BtnContainer /> */}
             {/* <BtnAddSub/> */}
-
+              {}
             <View style={{ backgroundColor: 'red', height: 35, width: 125, borderRadius: 12, alignItems: 'center', padding: 6, flexDirection: 'row' }}>
               <Pressable onPress={() => { cart.sub(prices,name,avatar) }} style={{ width: 35 }}>
                 <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 15 }}>-</Text>
               </Pressable>
 
-              <Pressable onPress={() => { btnHandler() }} style={{ width: 35, backgroundColor: 'white', height: 34, paddingTop: 8 }}>
+              <Pressable style={{ width: 35, backgroundColor: 'white', height: 34, paddingTop: 8 }}>
                 <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>{show?show:0}</Text>
               </Pressable>
 

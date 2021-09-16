@@ -60,7 +60,7 @@ const styles = StyleSheet.create(
   
       },
       searchContainer: {
-  
+        width: '50',
         flexDirection: 'row',
         borderRadius: 30,
         height: 30,

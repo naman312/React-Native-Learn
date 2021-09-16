@@ -30,7 +30,7 @@ export default function HomeScreen({ navigation }) {
         options={{
           title: 'My home',
           headerStyle: {
-            backgroundColor: '#f4511e',
+            backgroundColor: 'red',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {

@@ -161,23 +161,23 @@ let DetailView = () => {
 
             <View style={{ marginLeft: 5, marginTop: 30 }}>
                 <View>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 2, marginBottom: 2, marginLeft: 5 }}>Billing Details </Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 2, marginBottom: 2, marginLeft: 20 }}>Billing Details </Text>
                 </View>
                 <View style={{ flexDirection: 'row' }} >
-                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }} >(Price {cart.cartlen} Qty)   </Text>
-                    <Text style={{ letterSpacing: 1, marginLeft: 190 }} >  Rs. {cart.price} </Text>
+                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 20 }} >(Price {cart.cartlen} Qty)   </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 170 }} >  Rs. {cart.price} </Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
 
-                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }}>Delivery </Text>
-                    <Text style={{ letterSpacing: 1, marginLeft: 232 }} >  Free </Text>
+                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 20 }}>Delivery </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 215 }} >  Free </Text>
 
                     <Text style={{ letterSpacing: 1, marginLeft: 180 }}>  {cart.price}</Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
 
-                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 5 }}>Total  </Text>
-                    <Text style={{ letterSpacing: 1, marginLeft: 250 }}>  Rs. {cart.price}</Text>
+                    <Text style={{ letterSpacing: 1, textAlign: 'left', marginLeft: 20 }}>Total  </Text>
+                    <Text style={{ letterSpacing: 1, marginLeft: 230 }}>  Rs. {cart.price}</Text>
                 </View>
             </View>
 
@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         flexWrap: "wrap",
+        marginLeft: 20,
         paddingTop: 20,
         borderBottomColor: "rgba(0, 0, 0, 0.1)",
         borderBottomWidth: 2

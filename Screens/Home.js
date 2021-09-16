@@ -80,7 +80,7 @@ console.log('i am called ib the switch',switchparam)
   
     return (
         <>
-      <ScrollView contentContainerStyle={{backgroundColor: 'white'}}>
+      <ScrollView contentContainerStyle={{backgroundColor: 'white'}}   showsVerticalScrollIndicator={false}>
   {/*search bat */}
        
       
@@ -163,11 +163,8 @@ const styles = StyleSheet.create(
       input: {
         padding: 8,
         flex: 1,
-  
-  
       },
       searchContainer: {
-        
         marginLeft: 24,
         width: 350,
         marginTop: 20,

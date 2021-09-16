@@ -59,7 +59,9 @@ const Itemlist = ({id,name}) => {
                 />
                 <Button style={{ backgroundColor: 'red' }} />
               </View>
+
             </View>
+            
           </View>
         </View>
   

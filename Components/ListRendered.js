@@ -23,6 +23,7 @@ export default function ListRendered({prior1}){
           renderItem={renderItem}
           horizontal={true}
           keyExtractor={(prior1) ? item => item.id : null}
+          showsHorizontalScrollIndicator={false}
         />
       </View>
     )
@@ -39,6 +40,7 @@ const styles = StyleSheet.create(
         flexDirection: 'row',
         height: 300,
         marginBottom: 15
+        
       },
       img: {
         height: 200,
@@ -66,7 +68,7 @@ const styles = StyleSheet.create(
         borderRadius: 30,
         height: 30,
         borderColor: 'black',
-        borderWidth: 2,
+        borderWidth: 1,
       },
   
   

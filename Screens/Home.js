@@ -168,9 +168,9 @@ const styles = StyleSheet.create(
       },
       searchContainer: {
         
-        marginLeft: 13,
+        marginLeft: 15,
         width: 365,
-        marginTop: 30,
+        marginTop: 20,
         marginBottom: 10,
         flexDirection: 'row',
         borderRadius: 30,

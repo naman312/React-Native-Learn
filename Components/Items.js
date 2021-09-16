@@ -75,12 +75,11 @@ const Itemlist = ({ name, prices, avatar }) => {
 
         />
       </View>
-      <View style={{ marginLeft: 30 }} >
+      <View style={{marginRight: 15,marginLeft: 5 }} >
         <Text style={{ marginBottom: 5, fontWeight: '400', textAlign: 'center' }}>{name} </Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
           <Text style={{ fontWeight: 'bold', fontSize: 22, marginBottom: 5, marginRight: 18 }}>{'\u20B9'}{prices}</Text>
           <Text style={{ fontSize: 15, marginBottom: 5, textDecorationLine: 'line-through', marginRight: 18 }}>{'\u20B9'}154</Text>
-          <Text style={{ fontSize: 15, marginBottom: 5, color: "rgba(0, 0, 0.5, 0.9)", fontWeight: '400' }}>({'\u20B9'}290/L)</Text>
         </View>
 
         <View style={{ flexDirection: 'row' }}>
@@ -142,8 +141,6 @@ const Itemlist = ({ name, prices, avatar }) => {
     </View>
   )
 
-
-
 }
 
 const styles = StyleSheet.create({
@@ -162,7 +159,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     borderBottomColor: "rgba(0, 0, 0, 0.1)",
     borderBottomWidth: 2,
-    height: 300
+    height: 300,
+    
 
   },
   img: {

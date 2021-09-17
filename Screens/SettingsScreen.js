@@ -88,8 +88,8 @@ const SettingsScreen = () => {
 
   let ITEM_HEIGHT = 10;
   return (
-    <SectionListScreen/>
-
+    // <User/>
+<SectionListScreen/>
   );
 };
 

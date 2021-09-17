@@ -1,11 +1,14 @@
 
 
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image, FlatList,SafeAreaView } from "react-native";
-
+import { StyleSheet, Text, TouchableOpacity, TouchableNativeFeedback, View, Image, FlatList, SafeAreaView } from "react-native";
+import Item from '../Components/Items'
 import ItemList from "../android/app/src/components/ItemList";
 import axios from 'react-native-axios'
 import Loading from "../android/app/src/components/Loading";
+import  User from './User'
+import SectionListScreen from './SectionListScreen'
+import { Section } from "react-native-paper/lib/typescript/components/List/List";
 // if (loading == true )
 // return loading page
 // if error is true 
@@ -15,52 +18,53 @@ import Loading from "../android/app/src/components/Loading";
 
 
 
-let page=1;
-let ErrorPage=()=>{
-   return (
-     <View style={{backgroundColor: 'red'}}>
-        <Text style={{fontSize: 20, alignItems: 'center',color: 'white'}}>Error Bad network </Text>
-     </View>
-   )
+let page = 1;
+let ErrorPage = () => {
+  return (
+    <View style={{ backgroundColor: 'red' }}>
+      <Text style={{ fontSize: 20, alignItems: 'center', color: 'white' }}>Error Bad network </Text>
+    </View>
+  )
 }
 
 const SettingsScreen = () => {
   let dataArray = [];
-  const[loading, setLoading]=useState(true);
-  let [errorcab, setError]=useState(false);
+  const [loading, setLoading] = useState(true);
+  let [errorcab, setError] = useState(false);
   const [data, setData] = useState([]);
 
-  let loadMoreResults=()=>{
+  let loadMoreResults = () => {
     page++;
     setLoading(true);
     setError(false);
     console.log("----------------------------------------------------------------")
   }
-  let loadFresh=()=>{
+  let loadFresh = () => {
     setError(false);
     setLoading(true);
     setData([]);
-   
+
   }
 
-let Header=()=>{
-  return (
-    <View style={{backgroundColor: 'red', height: 50}}>
-      <Text style={{color: 'white', fontWeight: 'bold', fontSize: 28,textAlign:'center',margin: 5}}>City Mall</Text>
-    </View>
-  )
-}
+  let Header = () => {
+    return (
+      <View style={{ backgroundColor: 'red', height: 50 }}>
+        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 28, textAlign: 'center', margin: 5 }}>City Mall</Text>
+      </View>
+    )
+  }
 
 
   useEffect(() => {
-    let url = `https://randomuser.me/api/?page=${page}&results=30`;
-   // url=toString(url);
+    let url = `https://randomuser.me/api/?page=${page}&results=10`;
+
+    // url=toString(url);
     axios.get(url)
       .then(response => {
-        console.log("heydjjjacskjcvklzcv",response.data.results[0].location.city);
+        console.log("heydjjjacskjcvklzcv", response.data.results[0].location.city);
         console.log("res", typeof (response));
-     //   console.log(response.data[0]);
-      dataArray = response.data.results;
+        //   console.log(response.data[0]);
+        dataArray = response.data.results;
         // response.data[0].id 
         // response.data[0].title
         let copydata = dataArray.map((element) => {
@@ -68,83 +72,30 @@ let Header=()=>{
             id: element.location.street.number,
             title: element.location.city
           })
-        })  
+        })
         console.log("length of copy dtaa", copydata.length)
-        setData([...data,...copydata]);
+        setData([...data, ...copydata]);
         //console.log(copydata);
-          setLoading(false);
-          setError(false);
+        setLoading(false);
+        setError(false);
       })
       .catch(err => {
         console.log(err)
         setLoading(false);
         setError(true);
       })
-  },[loading])
+  }, [loading])
 
-let ITEM_HEIGHT=10;
+  let ITEM_HEIGHT = 10;
   return (
+    <SectionListScreen/>
 
-    <SafeAreaView style={styles.container}>
-     
-
-      {loading? <Loading/>:null }
-        {  errorcab?<ErrorPage/>: <FlatList 
-          data={data}
-          onEndReached={loadMoreResults}
-          onEndReachedThreshold={0.5}
-          getItemLayout={(data, index) => (    {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}  )}
-         renderItem={({ item, index }) => {
-            return (
-              <ItemList
-                name={item.title}
-                id={item.email}
-              />
-            )
-          }}
-          keyExtractor={item => item.id}
-          extraData={data}  
-          onRefresh={loadFresh}   
-          refreshing={loading}
-          ListHeaderComponent={Header}
-          stickyHeaderIndices={[0]}
-     
-        />
-        }    
-        
-
-      {/* //  loading? */}
-      {/* //   <Loading/>:(errorcab ? */}
-      {/* //     <ErrorPage/>:null):<FlatList */}
-      {/* //     data={data}
-      //     renderItem={({ item, index }) => {
-
-      //       return (
-      //         // <View>
-      //         //   <Text>1</Text>
-      //         //   </View>
-
-      //         <ItemList
-      //           name={item.title}
-      //           id={item.id}
-
-      //         />
-      //       )
-
-      //     }}
-      //     keyExtractor={item => item.id}
-      //     extraData={data}          
-      //   />
-        */}
-      
-
-    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-   
+
 
   },
   box: {
@@ -192,3 +143,82 @@ const styles = StyleSheet.create({
 
 export default SettingsScreen;
 
+
+
+// import React from 'react';
+// import {  View, StyleSheet, FlatList, Image, ActivityIndicator } from 'react-native';
+// import Item from '../Components/Items';
+
+
+// export default function ListRendered({prior1}){
+
+//     const renderItem = ({ item }) => {
+
+//         return (
+//           <Item name={item.name}
+//             prices={item.prices}
+//             avatar={item.avatar} 
+//             />
+//         )
+
+//       }
+
+//     return (
+//         <View style={styles.container}>
+
+//         <FlatList data={prior1}
+//           renderItem={renderItem}
+//           horizontal={true}
+//           keyExtractor={(prior1) ? item => item.id : null}
+//           showsHorizontalScrollIndicator={false}
+//         />
+//       </View>
+//     )
+
+// }
+
+
+
+// const styles = StyleSheet.create(
+//     {
+//       container: {
+//         marginLeft: 0,
+//         backgroundColor: 'white',
+//         flexDirection: 'row',
+//         height: 300,
+//         marginBottom: 15
+
+//       },
+//       img: {
+//         height: 200,
+//         width: 500,
+//         resizeMode: 'stretch'
+//       },
+//       imageStyle: {
+//         padding: 5,
+//         marginLeft: 10,
+//         marginTop: 4,
+//         height: 25,
+//         width: 25,
+//         resizeMode: 'stretch',
+//         alignItems: 'center',
+//       },
+//       input: {
+//         padding: 6,
+//         flex: 1,
+
+
+//       },
+//       searchContainer: {
+
+//         flexDirection: 'row',
+//         borderRadius: 30,
+//         height: 30,
+//         borderColor: 'black',
+//         borderWidth: 1,
+//       },
+
+
+
+//     }
+//   )

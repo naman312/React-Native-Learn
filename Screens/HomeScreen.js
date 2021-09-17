@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }) {
 
         
         />
-        <Drawer.Screen name="settings" component={SettingsScreen} />
+        <Drawer.Screen name="settings" component={SettingsScreen}  screenoptions={{ header: ()=>(null)  }} />
       </Drawer.Navigator>
   
   

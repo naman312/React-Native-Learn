@@ -137,20 +137,17 @@ export default function SubmitScreen() {
                 <View style={{ backgroundColor: 'white', width: '95%', marginLeft: '2%', borderRadius: 8, padding: 10, paddingTop: 0, elevation: 4 }}>
                     
                 <View style={{ marginTop: 5, flexDirection: 'row'}}>
-                    <Text style={{fontSize: 18, fontWeight: 'bold', color: '#bea9c8', flex: 1,marginTop: 10}}>VISA****1234 </Text>
-                    <Text style={{fontSize: 18, fontWeight: 'bold', color: '#bea9c8', flex: 1,marginTop: 10, textAlign: 'right'}}>Change</Text>
+                    <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black', flex: 1,marginTop: 10}}>VISA****1234 </Text>
+                    <Text style={{fontSize: 16, fontWeight: 'bold', color: '#ea4c89', flex: 1,marginTop: 10, textAlign: 'right'}}>Change</Text>
                 </View>
 
-                
-                
-                
-                
-                
-                
+            
                 </View> 
             </View>
 
-
+            <View  style={{ position: 'absolute', top: 690, width: '100%',backgroundColor: '#ea4c89', height: 40, width: '95%',borderRadius: 25, marginLeft: '2%', justifyContent: 'center',alignContent: 'center'}}>
+                <Text style={{color: 'white', textAlign: 'center', fontSize: 18, fontWeight: 'bold',}}> Submit </Text>
+            </View>
 
         </View>
     )

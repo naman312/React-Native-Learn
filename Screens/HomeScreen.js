@@ -5,7 +5,7 @@ import Image from 'react-native'
 import Home from '../Screens/Home'
 import SettingsScreen from '../Screens/SettingsScreen';
 import harpic from '../android/app/src/assets/harpic.jpg'
-
+import SubmitScreen from './SubmitScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -39,7 +39,9 @@ export default function HomeScreen({ navigation }) {
 
         
         />
-        <Drawer.Screen name="settings" component={SettingsScreen}  screenoptions={{ header: ()=>(null)  }} />
+        <Drawer.Screen name="settings" component={SettingsScreen}  options={{ header: ()=>(null)  }} />
+        <Drawer.Screen name="submit" component={SubmitScreen} options={{header: ()=>(null)}}/>
+         
       </Drawer.Navigator>
   
   

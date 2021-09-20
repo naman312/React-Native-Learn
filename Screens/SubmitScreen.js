@@ -4,7 +4,7 @@ import burger from '../android/app/src/assets/burger.jpeg'
 import mexican from '../android/app/src/assets/mexican.jpeg'
 export default function SubmitScreen() {
     return (
-        <View style={{ flex: 1, position: 'relative' }}>
+        <View style={{ flex: 1, position: 'relative' , backgroundColor: '#f5f5f5'}}>
             <View style={{ backgroundColor: '#e8b730', height: '20%', paddingTop: 50  }}>
                 <Text style={{ color: "#6f4aae", fontWeight: 'bold', fontSize: 42, marginLeft: 4, }} >Checkout</Text>
             </View>
@@ -26,8 +26,6 @@ export default function SubmitScreen() {
                 <Text style={{ fontSize: 28, color: "#6f4aae", fontWeight: 'bold' }}> Your Order </Text>
                 <View style={{ backgroundColor: 'white', width: '95%', marginLeft: '2%', borderRadius: 8, padding: 10, paddingTop: 0, elevation: 4 }}>
                     
-                    
-                    
                     <View style={{ flexDirection: 'row' }}>
 
                         <View>
@@ -46,10 +44,10 @@ export default function SubmitScreen() {
                                 <Text style={{ flex: 1, marginTop: 8, color: "#6f4aae", fontSize: 16, fontWeight: 'bold' }} >Smoking Beaf</Text>
 
                             </View>
-                            <View style={{padding:0, flex:1}} >
-                            <Text style={{fontSize: 14, color: "#bea9c8", fontWeight: 'bold' }}>500g</Text>
+                            <View style={{padding:0, flex:1, flexDirection: 'row'}} >
+                            <Text style={{fontSize: 14, color: "#bea9c8", fontWeight: 'bold', flex:1 }}>500g</Text>
 
-                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: "#6f4aae", textAlign: 'right' }}>$10.00</Text>
+                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: "#6f4aae", textAlign: 'right', flex:1 }}>$10.00</Text>
                             </View>
                                  
                         </View>
@@ -60,7 +58,7 @@ export default function SubmitScreen() {
                     {/* order component started                      */}
                     <View style={{ flexDirection: 'row' }}>
 
-                        <View>
+                        <View >
                             <Image
                                 style={{ resizeMode: 'contain', borderRadius: 8, marginRight: 10 }}
                                 source={mexican}
@@ -76,10 +74,10 @@ export default function SubmitScreen() {
                                 <Text style={{ flex: 1, marginTop: 8, color: "#6f4aae", fontSize: 16, fontWeight: 'bold' }} >Mexican Styke</Text>
 
                             </View>
-                            <View style={{padding:0, flex:1}} >
-                            <Text style={{fontSize: 14, color: "#bea9c8", fontWeight: 'bold' }}>600g</Text>
+                            <View style={{padding:0, flex:1, flexDirection: 'row'}} >
+                            <Text style={{fontSize: 14, color: "#bea9c8", fontWeight: 'bold', flex:1 }}>600g</Text>
 
-                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: "#6f4aae", textAlign: 'right' }}>$20.00</Text>
+                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: "#6f4aae", textAlign: 'right', flex:1 }}>$20.00</Text>
                             </View>
                                  
                         </View>
@@ -108,10 +106,10 @@ export default function SubmitScreen() {
                                 <Text style={{ flex: 1, marginTop: 8, color: "#6f4aae", fontSize: 16, fontWeight: 'bold' }} >Smoking Beaf</Text>
 
                             </View>
-                            <View style={{padding:0, flex:1}} >
-                            <Text style={{fontSize: 14, color: "#bea9c8", fontWeight: 'bold' }}>500g</Text>
+                            <View style={{padding:0, flex:1, flexDirection: 'row'}} >
+                            <Text style={{fontSize: 14, color: "#bea9c8", fontWeight: 'bold', flex:1 }}>500g</Text>
 
-                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: "#6f4aae", textAlign: 'right' }}>$10.00</Text>
+                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: "#6f4aae", textAlign: 'right', flex:1 }}>$10.00</Text>
                             </View>
                                  
                         </View>
@@ -133,7 +131,7 @@ export default function SubmitScreen() {
 
             {/* part-3 */}
             <View style={{ position: 'absolute', top: 550, width: '100%'}}>
-                <Text style={{ fontSize: 28, color: "#6f4aae", fontWeight: 'bold' }}> Payment </Text>
+                <Text style={{ fontSize: 28, color: "#6f4aae", fontWeight: 'bold', marginBottom: 8 }}> Payment </Text>
                 <View style={{ backgroundColor: 'white', width: '95%', marginLeft: '2%', borderRadius: 8, padding: 10, paddingTop: 0, elevation: 4 }}>
                     
                 <View style={{ marginTop: 5, flexDirection: 'row'}}>
